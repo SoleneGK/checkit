@@ -1,0 +1,23 @@
+{% extends "header.html.twig" %}
+
+{% block body %}
+	<h1>Check it</h1>
+
+	<form action="{{ path('account_creation') }}" method="post">
+		<h2>Créer un compte</h2>
+
+		{% if error_message %}
+			<p>{{ error_message }}</p>
+		{% endif %}
+
+		<label for="account_creation_email">Entrer un mail</label><br>
+		<input type="text" name="account_creation_email" id="account_creation_email" placeholder="e-mail" value="{{ mail_submitted }}" required><br>
+		<label for="account_creation_password">Entrer un mot de passe</label><br>
+		<input type="password" name="account_creation_password" id="account_creation_password" required><br>
+		<span class="legend">Minimum 8 caractères</span><br>
+		<label for="account_creation_password_confirmation">Recopier le mot de passe</label><br>
+		<input type="password" name="account_creation_password_confirmation" id="account_creation_password_confirmation" required><br>
+		<span class="cgu">En validant ce formulaire, je reconnais accepter les conditions générales d'utilisation.</span><br>
+		<input type="submit" value="Créer le compte">
+	</form>
+{% endblock %}

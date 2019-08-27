@@ -1,15 +1,17 @@
 {% extends "header.html.twig" %}
 
 {% block body %}
-    <form action="{{ path('index') }}" method="post">
-        <label for="login_email">Identifiant</label><br>
-        <input type="text" id="login_email" name="login_email" placeholder="e-mail"><br>
-        <label for="login_password">Mot de passe</label><br>
-        <input type="password" id="login_password" name="login_password"><br>
-        <input type="checkbox" name="permanent_connection" id="permanent_connection">
-        <label for="permanent_connection">Rester connecté</label><br>
-        <a href="#">Mot de passe oublié</a><br>
-        <input type="submit" value="Se connecter"><br>
-        <button><a href="#">Créer un compte</a></button>
-    </form>
+	<h1>Check it</h1>
+
+	<form action="{{ path('index') }}" method="post">
+		<label for="login_email">Identifiant</label><br>
+		<input type="text" id="login_email" name="login_email" placeholder="e-mail" required><br>
+		<label for="login_password">Mot de passe</label><br>
+		<input type="password" id="login_password" name="login_password" required><br>
+		<input type="checkbox" name="permanent_connection" id="permanent_connection" required>
+		<label for="permanent_connection">Rester connecté</label><br>
+		<a href="#">Mot de passe oublié</a><br>
+		<input type="submit" value="Se connecter"><br>
+		<button><a href="{{ path('account_creation') }}">Créer un compte</a></button>
+	</form>
 {% endblock %}

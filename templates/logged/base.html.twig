@@ -1,0 +1,21 @@
+{% extends "header.html.twig" %}
+
+{% block body %}
+    <!-- Menu -->
+    <div>
+        <h1>Check it</h1>
+
+        <nav>
+            <div><span class="nav_icon add_nav_icon"></span><span class="nav_text">Ajouter une tâche</span></div>
+            <div><span class="nav_icon edition_nav_icon"></span><span class="nav_text">Passer en mode édition</span></div>
+            <div><span class="nav_icon sort_nav_icon"></span><span class="nav_text">Trier par périodicité</span></div>
+            <div><span class="nav_icon user_nav_icon"></span><span class="nav_text">Mon compte</span></div>
+            <div><span class="nav_icon signout_nav_icon"></span><span class="nav_text">Se déconnecter</span></div>
+        </nav>
+    </div>
+    
+    {% block content %}
+        
+    {% endblock %}
+{% endblock %}
+
