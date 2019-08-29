@@ -1,7 +1,6 @@
-{% extends "header.html.twig" %}
+{% extends "logout/base.html.twig" %}
 
-{% block body %}
-    <h1>Check it</h1>
-    <p>Votre compte a bien été créé, vous pouvez maintenant vous connecter.</p>
-    <button><a href="{{ path('index') }}">Page d'accueil</a></button>
+{% block content %}
+<p>Votre compte a bien été créé, vous pouvez maintenant vous connecter.</p>
+<div class="text-center"><button type="button" class="btn btn-blue"><a href="{{ path('index') }}">Page d'accueil</a></button></div>
 {% endblock %}

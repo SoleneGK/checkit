@@ -12,7 +12,19 @@ class CheckItController extends AbstractController
     */
     public function printLoginPage()
     {
-        return $this->render('logout/login.html.twig');
+        // Est-ce qu'il y a eu une tentative de connexion échouée ?
+        $login_error = true;
+
+        if ($login_error == true) {
+            $error_message = "Identifiants incorrects";
+
+            return $this->render('logout/login.html.twig', [
+                'error_message' => $error_message
+            ]);
+        }
+        else {
+            return $this->render('logout/login.html.twig');
+        }
     }
 
     /**
@@ -20,11 +32,11 @@ class CheckItController extends AbstractController
      */
     public function printAccountCreationPage() {
         // Regarder s'il y a des données envoyées par le formulaire
-        $form_submitted = false;
+        $form_submitted = true;
 
         if ($form_submitted == true) {
             // Essayer de créer un compte
-            $account_created = false;
+            $account_created = true;
 
             if ($account_created == true) {
                 return $this->render('logout/account_created.html.twig');
@@ -41,9 +53,15 @@ class CheckItController extends AbstractController
         }
         else {
             return $this->render('logout/account_creation.html.twig', [
-                'error_message' => "",
                 'mail_submitted' => ""
             ]);
         }
+    }
+
+    /**
+     * @Route("/taches/priorite", name="task_list")
+     */
+    public function printTaskList() {
+        return $this->render('logged/task_list_by_priority.html.twig');
     }
 }

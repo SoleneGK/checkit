@@ -1,21 +1,30 @@
 {% extends "header.html.twig" %}
 
 {% block body %}
-    <!-- Menu -->
-    <div>
-        <h1>Check it</h1>
-
-        <nav>
-            <div><span class="nav_icon add_nav_icon"></span><span class="nav_text">Ajouter une tâche</span></div>
-            <div><span class="nav_icon edition_nav_icon"></span><span class="nav_text">Passer en mode édition</span></div>
-            <div><span class="nav_icon sort_nav_icon"></span><span class="nav_text">Trier par périodicité</span></div>
-            <div><span class="nav_icon user_nav_icon"></span><span class="nav_text">Mon compte</span></div>
-            <div><span class="nav_icon signout_nav_icon"></span><span class="nav_text">Se déconnecter</span></div>
-        </nav>
-    </div>
-    
-    {% block content %}
-        
-    {% endblock %}
+<div class="container full-height w-100 m-0">
+	<div class="row full-height">
+		<!-- Menu -->
+		<div class="col-md-3 menu full-height">
+			<h1 class="mx-auto">Check it</h1>
+	
+			<nav class="row">
+				<div class="col-6"><span class="fas fa-plus"></span></div>
+				<div class="col-6">Ajouter une tâche</div>
+				<div class="col-6"><span class="fas fa-tools"></span></div>
+				<div class="col-6">Passer en mode édition</div>
+				<div class="col-6"><span class="fas fa-sort-amount-up-alt"></span></div>
+				<div class="col-6">Trier par périodicité</div>
+				<div class="col-6"><span class="fas fa-user"></span></div>
+				<div class="col-6">Mon compte</div>
+				<div class="col-6"><span class="fas fa-sign-out-alt"></span></div>
+				<div class="col-6">Se déconnecter</div>
+			</nav>
+		</div>
+	
+		<div class="col">
+			{% block content %}{% endblock %}
+		</div>
+	</div>	
+</div>
 {% endblock %}
 

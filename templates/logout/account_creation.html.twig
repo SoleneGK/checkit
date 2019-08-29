@@ -1,23 +1,30 @@
-{% extends "header.html.twig" %}
+{% extends "logout/base.html.twig" %}
 
-{% block body %}
-	<h1>Check it</h1>
+{% block content %}
+<form action="{{ path('account_creation') }}" method="post" class="mx-auto mb-5 text-center">
+	<h2>Créer un compte</h2>
 
-	<form action="{{ path('account_creation') }}" method="post">
-		<h2>Créer un compte</h2>
+	{% if error_message is defined %}
+		<p class="error_message">{{ error_message }}</p>
+	{% endif %}
 
-		{% if error_message %}
-			<p>{{ error_message }}</p>
-		{% endif %}
+	<div class="form-group">
+		<label for="account_creation_email">Entrer un mail</label>
+		<input type="text" name="account_creation_email" id="account_creation_email" placeholder="e-mail" value="{{ mail_submitted }}" required class="form-control">
+	</div>
 
-		<label for="account_creation_email">Entrer un mail</label><br>
-		<input type="text" name="account_creation_email" id="account_creation_email" placeholder="e-mail" value="{{ mail_submitted }}" required><br>
-		<label for="account_creation_password">Entrer un mot de passe</label><br>
-		<input type="password" name="account_creation_password" id="account_creation_password" required><br>
-		<span class="legend">Minimum 8 caractères</span><br>
-		<label for="account_creation_password_confirmation">Recopier le mot de passe</label><br>
-		<input type="password" name="account_creation_password_confirmation" id="account_creation_password_confirmation" required><br>
-		<span class="cgu">En validant ce formulaire, je reconnais accepter les conditions générales d'utilisation.</span><br>
-		<input type="submit" value="Créer le compte">
-	</form>
+	<div class="form-group">
+		<label for="account_creation_password">Entrer un mot de passe</label>
+		<input type="password" name="account_creation_password" id="account_creation_password" required class="form-control">
+		<small class="form-text">Minimum 8 caractères</small><br>
+	</div>
+
+	<div class="form-group">
+		<label for="account_creation_password_confirmation">Recopier le mot de passe</label>
+		<input type="password" name="account_creation_password_confirmation" id="account_creation_password_confirmation" required class="form-control">
+	</div>
+
+	<div class="mb-3">En validant ce formulaire, je reconnais accepter les conditions générales d'utilisation.</div>
+	<input type="submit" value="Créer le compte" class="btn btn-blue">
+</form>
 {% endblock %}
