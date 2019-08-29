@@ -10,21 +10,21 @@
 
 	<div class="form-group">
 		<label for="account_creation_email">Entrer un mail</label>
-		<input type="text" name="account_creation_email" id="account_creation_email" placeholder="e-mail" value="{{ mail_submitted }}" required class="form-control">
+		<input type="text" name="account_creation_email" id="account_creation_email" placeholder="e-mail" value="{{ mail_submitted }}" required class="form-control mx-auto">
 	</div>
 
 	<div class="form-group">
 		<label for="account_creation_password">Entrer un mot de passe</label>
-		<input type="password" name="account_creation_password" id="account_creation_password" required class="form-control">
-		<small class="form-text">Minimum 8 caractères</small><br>
+		<input type="password" name="account_creation_password" id="account_creation_password" required class="form-control mx-auto">
+		<small class="form-text">Minimum 8 caractères</small>
 	</div>
 
 	<div class="form-group">
 		<label for="account_creation_password_confirmation">Recopier le mot de passe</label>
-		<input type="password" name="account_creation_password_confirmation" id="account_creation_password_confirmation" required class="form-control">
+		<input type="password" name="account_creation_password_confirmation" id="account_creation_password_confirmation" required class="form-control mx-auto">
 	</div>
 
-	<div class="mb-3">En validant ce formulaire, je reconnais accepter les conditions générales d'utilisation.</div>
+	<div class="mb-3 cgu mx-auto">En validant ce formulaire, je reconnais accepter les conditions générales d'utilisation.</div>
 	<input type="submit" value="Créer le compte" class="btn btn-blue">
 </form>
 {% endblock %}

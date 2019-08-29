@@ -34,7 +34,7 @@ class CheckItController extends AbstractController
         // Regarder s'il y a des données envoyées par le formulaire
         $form_submitted = true;
 
-        if ($form_submitted == true) {
+        if ($form_submitted == false) {
             // Essayer de créer un compte
             $account_created = true;
 
@@ -56,12 +56,5 @@ class CheckItController extends AbstractController
                 'mail_submitted' => ""
             ]);
         }
-    }
-
-    /**
-     * @Route("/taches/priorite", name="task_list")
-     */
-    public function printTaskList() {
-        return $this->render('logged/task_list_by_priority.html.twig');
     }
 }

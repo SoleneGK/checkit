@@ -31,6 +31,7 @@ input[type=text], input[type=password], input[type=text]:focus, input[type=passw
     background-color: #313c48;
     color:#3bc1ff;
     border-color:#3bc1ff;
+    max-width: 200px;
 }
 
 input[type=submit], .btn-blue {
@@ -49,5 +50,9 @@ button a:hover {
 
 .error_message {
     color: #c93629;
+}
+
+.cgu {
+    max-width: 250px;
 }
 
