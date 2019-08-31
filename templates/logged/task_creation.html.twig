@@ -1,0 +1,97 @@
+{% extends "logged/base.html.twig" %}
+
+{% block content %}
+	<div class="row justify-content-center">
+		<div class="col-6 p-3">
+			<form action="{{ path('account_creation') }}" method="post" class="mx-auto text-center form-with-background p-3 rounded-lg">
+				<h2 class="text-center mb-4">Ajouter une tâche</h2>
+
+				<div class="form-group">
+					<label for="task_creation_title">Titre</label>
+					<input type="text" name="task_creation_title" id="task_creation_title" placeholder="Titre" required class="form-control mx-auto">
+				</div>
+
+				<div class="form-group">
+					<label for="task_creation_description">Description</label>
+					<textarea name="task_creation_description" id="task_creation_description" rows="3" class="form-control" placeholder="Description (optionnelle)"></textarea>
+				</div>
+
+				<div class="form-group row text-left">
+					<label for="task_creation_importancy" class="col-3 col-form-label">Importance</label>
+					<div class="col">
+						<select name="task_creation_importancy" id="task_creation_importancy" class="custom-select col" required>
+								<option value="optional" selected>Optionnelle</option>
+								<option value="normal">Normale</option>
+								<option value="important">Importante</option>
+								<option value="critical">Critique</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row text-left">
+					<label for="task_creation_periodicity" class="col-3 col-form-label">Périodicité</label>
+					<div class="col">
+						<select name="task_creation_periodicity" id="task_creation_periodicity" class="custom-select col" required>
+							<option value="U" selected>Aucune</option>
+							<option value="D">Quotidienne</option>
+							<option value="W">Hebdomadaire</option>
+							<option value="M">Mensuelle</option>
+							<option value="W1">Tous les lundis</option>
+							<option value="W2">Tous les mardis</option>
+							<option value="W3">Tous les mercredis</option>
+							<option value="W4">Tous les jeudis</option>
+							<option value="W5">Tous les vendredis</option>
+							<option value="W6">Tous les samedis</option>
+							<option value="W7">Tous les dimanches</option>
+							<option value="M1">Tous les 1er du mois</option>
+							<option value="M2">Tous les 2 du mois</option>
+							<option value="M3">Tous les 3 du mois</option>
+							<option value="M4">Tous les 4 du mois</option>
+							<option value="M5">Tous les 5 du mois</option>
+							<option value="M6">Tous les 6 du mois</option>
+							<option value="M7">Tous les 7 du mois</option>
+							<option value="M8">Tous les 8 du mois</option>
+							<option value="M9">Tous les 9 du mois</option>
+							<option value="M10">Tous les 10 du mois</option>
+							<option value="M11">Tous les 11 du mois</option>
+							<option value="M12">Tous les 12 du mois</option>
+							<option value="M13">Tous les 13 du mois</option>
+							<option value="M14">Tous les 14 du mois</option>
+							<option value="M15">Tous les 15 du mois</option>
+							<option value="M16">Tous les 16 du mois</option>
+							<option value="M17">Tous les 17 du mois</option>
+							<option value="M18">Tous les 18 du mois</option>
+							<option value="M19">Tous les 19 du mois</option>
+							<option value="M20">Tous les 20 du mois</option>
+							<option value="M21">Tous les 21 du mois</option>
+							<option value="M22">Tous les 22 du mois</option>
+							<option value="M23">Tous les 23 du mois</option>
+							<option value="M24">Tous les 24 du mois</option>
+							<option value="M25">Tous les 25 du mois</option>
+							<option value="M26">Tous les 26 du mois</option>
+							<option value="M27">Tous les 27 du mois</option>
+							<option value="M28">Tous les 28 du mois</option>
+							<option value="M29">Tous les 29 du mois</option>
+							<option value="M30">Tous les 30 du mois</option>
+							<option value="M31">Tous les 31 du mois</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row text-left">
+					<label for="task_creation_start_date" class="col-3">Début (optionnel)</label>
+					<div class="col">					
+						<input type="date" name="task_creation_start_date" id="task_creation_start_date" class="form-control col">
+					</div>
+				</div>
+
+				<div class="form-group row text-left">
+					<label for="task_creation_end_date" class="col-3">Fin (optionnel)</label>
+					<div class="col">
+						<input type="date" name="task_creation_end_date" id="task_creation_end_date" class="form-control col">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
