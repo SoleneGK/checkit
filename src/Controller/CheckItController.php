@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CheckItController extends AbstractController
 {  
-    /**
+    /*
     * @Route("/", name="index")
     */
     public function printLoginPage()
