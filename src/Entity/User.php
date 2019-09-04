@@ -35,6 +35,21 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $verification_code;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $verification_send_date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,5 +121,41 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getVerificationCode(): ?string
+    {
+        return $this->verification_code;
+    }
+
+    public function setVerificationCode(?string $verification_code): self
+    {
+        $this->verification_code = $verification_code;
+
+        return $this;
+    }
+
+    public function getVerificationSendDate(): ?\DateTimeInterface
+    {
+        return $this->verification_send_date;
+    }
+
+    public function setVerificationSendDate(?\DateTimeInterface $verification_send_date): self
+    {
+        $this->verification_send_date = $verification_send_date;
+
+        return $this;
     }
 }

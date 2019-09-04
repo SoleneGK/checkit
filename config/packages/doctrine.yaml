@@ -2,7 +2,10 @@ doctrine:
     dbal:
         # configure these for your database server
         dbname: checkit
-        host: localhost
+        # si mariadb est sur docker
+        host: 172.17.0.2
+        # dans les autres cas
+        #host: localhost
         port: 3306
         user: doctrine_user
         password: test
