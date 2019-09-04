@@ -3,9 +3,9 @@ doctrine:
         # configure these for your database server
         dbname: checkit
         # si mariadb est sur docker
-        host: 172.17.0.2
+        #host: 172.17.0.2
         # dans les autres cas
-        #host: localhost
+        host: localhost
         port: 3306
         user: doctrine_user
         password: test
