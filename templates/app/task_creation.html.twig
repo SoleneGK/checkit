@@ -1,0 +1,14 @@
+{% extends "app/index.html.twig" %}
+
+{% block content %}
+	<h1>Ajouter une tâche</h1>
+
+	{{ form_start(taskCreationForm) }}
+		{{ form_row(taskCreationForm.title) }}
+		{{ form_row(taskCreationForm.description) }}
+		{{ form_row(taskCreationForm.start_date) }}
+		{{ form_row(taskCreationForm.end_date) }}
+
+		<button class="btn">Créer la tâche</button>
+	{{ form_end(taskCreationForm) }}
+{% endblock %}
