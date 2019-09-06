@@ -21,12 +21,15 @@ class TaskFormType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true,
             ])
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, [
+                'required' => false,
+            ])
             ->add('start_date', DateType::class, [
                 'widget' => 'single_text',
             ])
             ->add('end_date', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('priority', EntityType::class, [
                 'class' => Priority::class,

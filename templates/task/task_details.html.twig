@@ -1,0 +1,13 @@
+{% extends "app/index.html.twig" %}
+
+{% block content %}
+    <h1>Détails</h1>
+    <p>
+        Titre : {{ task.title }}<br>
+        Description : {{ task.description }}<br>
+        Date de début : {{ task.startDate|date("m/d/Y") }}<br>
+        Date de fin : {{ task.endDate|date("m/d/Y") }}<br>
+        Priorité : {{ task.priority.name }}<br>
+        Périodicité : {{ task.periodicity.name }}
+    </p>
+{% endblock %}

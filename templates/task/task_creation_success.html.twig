@@ -1,0 +1,7 @@
+{% extends "app/index.html.twig" %}
+
+{% block content %}
+    <p>La tâche a bien été créée avec les informations suivantes :</p>
+    <button><a href="{{ path('index') }}">Retourner à l'accueil</a></button>
+    <button><a href="{{ path('task_creation') }}">Créer une nouvelle tâche</a></button>
+{% endblock %}
