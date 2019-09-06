@@ -3,12 +3,14 @@
 {% block content %}
 	<h1>Ajouter une tâche</h1>
 
-	{{ form_start(taskCreationForm) }}
-		{{ form_row(taskCreationForm.title) }}
-		{{ form_row(taskCreationForm.description) }}
-		{{ form_row(taskCreationForm.start_date) }}
-		{{ form_row(taskCreationForm.end_date) }}
+	{{ form_start(taskForm) }}
+		{{ form_row(taskForm.title) }}
+		{{ form_row(taskForm.description) }}
+		{{ form_row(taskForm.start_date) }}
+		{{ form_row(taskForm.end_date) }}
+		{{ form_row(taskForm.priority) }}
+		{{ form_row(taskForm.periodicity) }}
 
 		<button class="btn">Créer la tâche</button>
-	{{ form_end(taskCreationForm) }}
+	{{ form_end(taskForm) }}
 {% endblock %}

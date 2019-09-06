@@ -52,7 +52,7 @@ class Task
      * @ORM\ManyToOne(targetEntity="App\Entity\Periodicity")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Periodicity;
+    private $periodicity;
 
     public function getId(): ?int
     {
@@ -133,12 +133,12 @@ class Task
 
     public function getPeriodicity(): ?Periodicity
     {
-        return $this->Periodicity;
+        return $this->periodicity;
     }
 
     public function setPeriodicity(?Periodicity $Periodicity): self
     {
-        $this->Periodicity = $Periodicity;
+        $this->periodicity = $Periodicity;
 
         return $this;
     }
