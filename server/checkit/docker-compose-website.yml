@@ -48,7 +48,10 @@ services:
   checkit-app:
    # based on image: php:7.1.12-fpm
     container_name: ${PROJECT_NAME}-app
-    image: php:7.3-fpm
+    build:
+      context: ..
+      dockerfile: ./checkit/custom-docker/checkit
+    image: checkit:lastet
     volumes:
       - ./app:/app
       - ../data/checkit/conf/php/php-settings.conf:/usr/local/etc/php-fpm.d/php-settings.conf

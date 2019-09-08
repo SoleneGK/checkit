@@ -1,0 +1,34 @@
+FROM php:7.3-fpm
+
+ENV COMPOSER_VERSION=1.9.0 COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_PATH=/usr/local/bin COMPOSER_COMMAND=composer
+ENV SYMFONY_ENV prod
+
+VOLUME /app
+WORKDIR /app
+
+RUN set -xe \
+ && apk add --no-cache git openssh-client coreutils freetype-dev libjpeg-turbo-dev libltdl libpng-dev icu icu-libs icu-dev unzip \
+ && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+ && docker-php-ext-install -j$(nproc) iconv mbstring intl pdo_mysql gd zip \
+ && apk add --no-cache --virtual build-deps g++ autoconf make \
+ && docker-php-source extract \
+ && git clone git://github.com/xdebug/xdebug.git \
+ && cd xdebug \
+ && ./rebuild.sh \
+ && cd .. \
+ && rm -Rf ./xdebug.git \
+ && docker-php-ext-enable xdebug opcache \
+ && docker-php-source delete \
+ && apk del build-deps \
+ && mkdir -p /var/lib/php/sessions \
+ && chown -Rf www-data:www-data /var/lib/php/sessions \
+ && curl -sS https://getcomposer.org/installer | php -- --install-dir=${COMPOSER_PATH} --filename=${COMPOSER_COMMAND} --version=${COMPOSER_VERSION}
+
+USER www-data
+RUN $COMPOSER_COMMAND global require hirak/prestissimo:^0.3 \
+ && $COMPOSER_COMMAND global require roave/security-advisories:dev-master
+
+USER root
+COPY ./docker/php-fpm/php-settings.conf /usr/local/etc/php-fpm.d/
+
+USER www-data
