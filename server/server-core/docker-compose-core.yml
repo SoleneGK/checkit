@@ -1,0 +1,52 @@
+##############################################################################################
+# ServerCore - v1.O
+#---------------------------------------------------------------------------------------------
+# This stack is a server stack for multi application docker server
+# It's based on Traefik and portainer, and must be used with the dedicated .env and control 
+# script provided.
+#---------------------------------------------------------------------------------------------
+# Copyright (c) 2018, Emmanuel LARGE
+# All rights reserved.
+##############################################################################################
+version: '3.2'
+
+services:
+  reverse-proxy:
+    image: traefik # The official Traefik docker image
+    container_name: ${PROXY_CONTAINER_NAME}
+    ports:
+      - "80:80"     # The HTTP port
+      - "443:443"
+      #- "8001:8001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${SERVER_FILES_PATH}/traefik-data/:/etc/traefik
+    networks:
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:${MONITOR_DOMAIN}" 
+      - "traefik.frontend.auth.basic=${SERVER_HR_BASIC_AUTH}"     
+      - "traefik.docker.network=frontend"
+      - "traefik.port=8001"
+    restart: always
+
+  portainer:
+    container_name: ${PORTAINER_CONTAINER_NAME}
+    restart: always
+    image: portainer/portainer
+    volumes:
+      - ${SERVER_FILES_PATH}/portainer-data/:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.frontend.rule=Host:${PORTAINER_DOMAIN}"
+      - "traefik.port=9000"
+      - "traefik.docker.network=frontend"
+      - "traefik.enable=true"
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external:
+      name: ${PROXY_NETWORK_NAME:-frontend}
