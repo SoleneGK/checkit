@@ -9,8 +9,8 @@
             Hello {{ app.user.username }}
 	
 			<nav class="row">
-				<div class="col-6"><span class="fas fa-plus"></span></div>
-				<div class="col-6">Ajouter une tâche</div>
+				<div class="col-6"><a href="{{ path('task_creation') }}"></a><span class="fas fa-plus"></span></a></div>
+				<div class="col-6"><a href="{{ path('task_creation') }}">Ajouter une tâche</a></div>
 				<div class="col-6"><span class="fas fa-tools"></span></div>
 				<div class="col-6">Passer en mode édition</div>
 				<div class="col-6"><span class="fas fa-sort-amount-up-alt"></span></div>

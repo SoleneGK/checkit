@@ -19,6 +19,18 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    public function findWithUserVerification($task_id, $user_id)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.id = :task_id')
+            ->setParameter('task_id', $task_id)
+            ->andWhere('t.owner = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Task[] Returns an array of Task objects
     //  */

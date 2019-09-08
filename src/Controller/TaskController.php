@@ -20,9 +20,9 @@ class TaskController extends AbstractController
 	 */
 	public function addTask(Request $request): Response
 	{
-		$task = new Task();
-		$task->setStartDate(new \DateTime());
-		$task->setOwner($this->getUser());
+        $task = new Task();
+        $task->setStartDate(new \DateTime());
+        $task->setOwner($this->getUser());
 		$form = $this->createForm(TaskFormType::class, $task);
 
 		$form->handleRequest($request);
@@ -35,19 +35,67 @@ class TaskController extends AbstractController
 
 			return $this->render('task/task_creation_success.html.twig');
 		}
-
-		return $this->render('task/task_creation.html.twig', [
-			'taskForm' =>$form->createView(),
-		]);
+        else
+        {
+            return $this->render('task/task_creation.html.twig', [
+                'taskForm' => $form->createView(),
+            ]);
+        }
     }
     
     /**
-     * @Route("/taches/{id}/modifier", name="task_modification")
+     * @Route("/taches/{task_id}/modifier", name="task_modification")
      */
-    public function modifyTask(Request $request): Response
+    public function modifyTask(Request $request, int $task_id): Response
     {
-        $task = new Task();
+        $user_id = $this->getUser()->getId();
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $original_task = $entityManager->getRepository(Task::class)->findWithUserVerification($task_id, $user_id);
+
+        // Check that the task is owned by current user
+        if (count($original_task) > 0)
+        {
+            $original_task = $original_task[0];
+            $displayed_task = new Task();
+            $displayed_task->copy($original_task);
+
+            $form = $this->createForm(TaskFormType::class);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted())
+            {
+                $displayed_task = $form->getData();
+
+                if ($form->isValid())
+                {
+                    $original_task = $displayed_task;
+                    var_dump($original_task);
+                    $entityManager->flush();
+
+                    return $this->redirectToRoute('index');
+                }
+                else
+                {
+                    return $this->render('task/task_modification.html.twig', [
+                        'taskForm' => $form->createView(),
+                        'task' => $displayed_task,
+                    ]);
+                }
+            }
+            else
+            {
+                var_dump($displayed_task);
+                return $this->render('task/task_modification.html.twig', [
+                    'taskForm' => $form->createView(),
+                    'task' => $displayed_task,
+                ]);
+            }
+        }
+        else
+        {
+            return $this->redirectToRoute('index');
+        }
     }
 
     /**
@@ -57,12 +105,14 @@ class TaskController extends AbstractController
     {
         $user = $this->getUser();
 
-        if ($task->getOwner()->getId() != $user->getId()) {
+        if ($task->getOwner()->getId() == $user->getId()) {
+            return $this->render('task/task_details.html.twig', [
+                'task' => $task,
+            ]);    
+        }
+        else
+        {
             return $this->redirectToRoute('index');
         }
-
-        return $this->render('task/task_details.html.twig', [
-            'task' => $task,
-        ]);
     }
 }

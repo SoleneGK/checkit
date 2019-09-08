@@ -142,4 +142,19 @@ class Task
 
         return $this;
     }
+
+    /**
+     * Copy the attributes of another task
+     */
+    public function copy(Task $original_task)
+    {
+        $this->id = $original_task->getId();
+        $this->setTitle($original_task->getTitle());
+        $this->setDescription($original_task->getDescription());
+        $this->setStartDate($original_task->getStartDate());
+        $this->setEndDate($original_task->getEndDate());
+        $this->setOwner($original_task->getOwner());
+        $this->setPriority($original_task->getPriority());
+        $this->setPeriodicity($original_task->getPeriodicity());
+    }
 }
