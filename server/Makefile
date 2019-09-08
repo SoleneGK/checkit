@@ -51,7 +51,6 @@ up:
 	make build-networks
 	make up-core
 	make up-app
-	make set-permissions
 
 down:
 	make down-core
@@ -60,6 +59,7 @@ down:
 restart:
 	make down
 	make up
+	make set-permissions
 
 build-networks:
 	make create-proxy-network
@@ -95,8 +95,8 @@ set-permissions:
 
 install:
 	make up
-	docker exec worldanvil-app composer install
-	docker exec worldanvil-app php bin/console doctrine:schema:create --env=dev
+	docker exec checkit-app composer install
+	docker exec checkit-app php bin/console doctrine:schema:create --env=dev
 	make restart
 
 ######################################
