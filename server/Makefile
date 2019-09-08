@@ -37,7 +37,7 @@ delete-proxy-network:
 #### app 
 ##########################################################
 create-app-network:
-	docker network ls|grep $(APP_NETWORK_NAME) > /dev/null || docker network create --driver bridge --subnet=192.$(SERVER_INT).$(WORLDANVIL_NETWORK_INT).0/24 $(WORLDANVIL_NETWORK_NAME)
+	docker network ls|grep $(APP_NETWORK_NAME) > /dev/null || docker network create --driver bridge --subnet=192.$(SERVER_INT).$(APP_NETWORK_INT).0/24 $(APP_NETWORK_NAME)
 delete-app-network:
 	docker network rm $(APP_NETWORK_NAME)
 
