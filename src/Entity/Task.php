@@ -144,17 +144,117 @@ class Task
     }
 
     /**
-     * Copy the attributes of another task
+     * Copy all the attributes of another task
      */
     public function copy(Task $original_task)
     {
+        $this->import($original_task);
         $this->id = $original_task->getId();
+        $this->setOwner($original_task->getOwner());
+    }
+
+    /**
+     * Import all modifiable attributes from another task
+     */
+    public function import(Task $original_task)
+    {
         $this->setTitle($original_task->getTitle());
         $this->setDescription($original_task->getDescription());
         $this->setStartDate($original_task->getStartDate());
         $this->setEndDate($original_task->getEndDate());
-        $this->setOwner($original_task->getOwner());
         $this->setPriority($original_task->getPriority());
         $this->setPeriodicity($original_task->getPeriodicity());
+    }
+
+    public function toLog()
+    {
+        $log = "id : ";
+        if (is_null($this->getId()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getId();
+        }
+        $log .= " / ";
+
+        $log .= "title : ";
+        if (is_null($this->getTitle()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getTitle();
+        }
+        $log .= " / ";
+
+        $log .= "description : ";
+        if (is_null($this->getDescription()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getDescription();
+        }
+        $log .= " / ";
+        
+        $log .= "startDate : ";
+        if (is_null($this->getStartDate()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getStartDate()->format('d-m-Y');
+        }
+        $log .= " / ";
+
+        $log .= "endDate : ";
+        if (is_null($this->getEndDate()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getEndDate()->format('d-m-Y');
+        }
+        $log .= " / ";
+
+        $log .= "owner : ";
+        if (is_null($this->getOwner()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getOwner()->getId();
+        }
+        $log .= " / ";
+
+        $log .= "priority : ";
+        if (is_null($this->getPriority()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getPriority()->getName();
+        }
+        $log .= " / ";
+
+        $log .= "periodicity : ";
+        if (is_null($this->getPeriodicity()))
+        {
+            $log .= "null";
+        }
+        else
+        {
+            $log .= $this->getPeriodicity()->getName();
+        }
+
+        return $log;
     }
 }

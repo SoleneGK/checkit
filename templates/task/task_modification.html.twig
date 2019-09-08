@@ -8,7 +8,7 @@
 		{{ form_widget(taskForm.description, {'value': task.description}) }}
 		{{ form_widget(taskForm.start_date, {'value': task.startDate|date("Y-m-d")}) }}
 		{{ form_widget(taskForm.end_date, {'value': task.endDate|date("Y-m-d")}) }}
-		{{ form_widget(taskForm.priority, {'value': task.priority.id}) }}
+		{{ form_widget(taskForm.priority, {'value': task.priority.id|number_format}) }}
 		{{ form_widget(taskForm.periodicity, {'value': task.periodicity.code}) }}
 
 		<button class="btn">Modifier</button>
