@@ -35,7 +35,7 @@ services:
     # Montage des volumes    
     volumes:
       # Volumes src
-      - checkit-app-src:/app
+      - ./app:/app
       # Chargement des config nginx
       - ../data/checkit/conf/nginx/checkit.conf:/etc/nginx/conf.d/checkit.conf
       # logging
@@ -81,10 +81,7 @@ networks:
   frontend:
     external:
       name: ${PROXY_NETWORK_NAME:-frontend}
-  host-backend:
+   backend:
     external:
-      name: ${METRICS_NETWORK_NAME:-host-metrics}
-  backend:
-    external:
-      name: ${checkit_NETWORK_NAME:-application-internal}
+      name: ${APP_NETWORK_NAME:-application-internal}
 
