@@ -81,7 +81,7 @@ networks:
   frontend:
     external:
       name: ${PROXY_NETWORK_NAME:-frontend}
-   backend:
+  backend:
     external:
       name: ${APP_NETWORK_NAME:-application-internal}
 
