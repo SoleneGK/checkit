@@ -12,12 +12,7 @@ RUN set -xe \
  && docker-php-ext-install -j$(nproc) iconv mbstring intl pdo_mysql gd zip \
  && apk add --no-cache --virtual build-deps g++ autoconf make \
  && docker-php-source extract \
- && git clone git://github.com/xdebug/xdebug.git \
- && cd xdebug \
- && ./rebuild.sh \
- && cd .. \
- && rm -Rf ./xdebug.git \
- && docker-php-ext-enable xdebug opcache \
+ && docker-php-ext-enable opcache \
  && docker-php-source delete \
  && apk del build-deps \
  && mkdir -p /var/lib/php/sessions \
