@@ -26,7 +26,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:${MONITOR_DOMAIN}" 
-      - "traefik.frontend.auth.basic=${SERVER_HR_BASIC_AUTH}"     
+      - "traefik.frontend.auth.basic=${SERVER_BASIC_AUTH}"     
       - "traefik.docker.network=frontend"
       - "traefik.port=8001"
     restart: always
