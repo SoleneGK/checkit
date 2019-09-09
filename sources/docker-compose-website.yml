@@ -19,7 +19,7 @@ services:
     volumes:
       - ../data/checkit/conf/varnish/default.vcl:/etc/varnish/default.vcl
     labels:
-      - "traefik.frontend.rule=${PROJECT_DOMAIN}"
+      - "traefik.frontend.rule=Host:${PROJECT_DOMAIN}"
       - "traefik.port=80"
       - "traefik.docker.network=frontend"
       - "traefik.enable=true"
