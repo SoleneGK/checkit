@@ -29,6 +29,11 @@ services:
       - "traefik.frontend.auth.basic=${SERVER_BASIC_AUTH}"     
       - "traefik.docker.network=frontend"
       - "traefik.port=8001"
+    environment:
+      - OVH_ENDPOINT=ovh-eu
+      - OVH_APPLICATION_KEY=7ugApP5U8PhMmS56
+      - OVH_APPLICATION_SECRET=iU920LHw32mBM3pGuaTjylkBRPWFtrvL
+      - OVH_CONSUMER_KEY=l5VKDT0nKxNv3orgNj9cSVDyf4a9LSV3
     restart: always
 
   portainer:

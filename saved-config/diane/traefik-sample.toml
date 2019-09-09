@@ -33,9 +33,9 @@ storageFile = "/etc/traefik/acme.json"
 entryPoint = "https"
 acmeLogging = true
 OnHostRule = true
- # [acme.dnsChallenge]
- # provider = "ovh"
- # delayBeforeCheck = 0
+  [acme.dnsChallenge]
+  provider = "ovh"
+  delayBeforeCheck = 10
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
