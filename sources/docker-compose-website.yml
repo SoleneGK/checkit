@@ -79,6 +79,18 @@ services:
     networks:
       - backend
 
+  maria-admin:
+    container_name: ${PROJECT_NAME}-phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    hostname: ${PROJECT_NAME}-phpmyadmin
+    restart: always
+    networks:
+      - backend
+    environment: 
+      - PMA_HOST=mariadb
+    ports:
+      - "8081:80"
+
 networks:
   frontend:
     external:
