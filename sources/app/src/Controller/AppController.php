@@ -16,6 +16,6 @@ class AppController extends AbstractController
      */
     public function index()
     {
-        return $this->redirectToRoute('display_task_by_priority');
+        return $this->redirectToRoute('display_tasks_by_priority');
     }
 }
