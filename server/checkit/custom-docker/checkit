@@ -9,7 +9,7 @@ WORKDIR /app
 RUN set -xe \
  && apk add --no-cache  libzip git openssh-client coreutils freetype-dev libjpeg-turbo-dev libltdl libpng-dev icu icu-libs icu-dev unzip \
  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
- && docker-php-ext-install -j$(nproc) iconv mbstring intl pdo_mysql gd zip \
+ && docker-php-ext-install -j$(nproc) iconv mbstring intl pdo_mysql \
  && apk add --no-cache --virtual build-deps g++ autoconf make \
  && docker-php-source extract \
  && docker-php-ext-enable opcache \
