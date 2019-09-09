@@ -1,0 +1,14 @@
+FROM php:7.3-fpm
+
+MAINTAINER Emmanuel LARGE
+
+RUN apt-get update && apt-get install -y \
+    php-fpm \
+    php-mcrypt \
+    php-mysql \
+    php-apcu \
+    php-curl \
+    php-intl \
+    php-xdebug \
+    php-xml \
+    php-zip
