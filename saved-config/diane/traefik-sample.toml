@@ -1,0 +1,52 @@
+debug = true
+logLevel = "ERROR"
+defaultEntryPoints = ["http","https"]
+
+################################################################
+# api configuration backend
+################################################################
+ [web]
+ address = ":8001"
+   [web.auth.basic]
+   users = ["admin:$apr1$it02jHe3$fnrmz/Q5TpCAjfhpyDIdj."]
+  
+
+################################################################
+# Entry-points configuration
+################################################################
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+    [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+    [entryPoints.https.tls]
+
+
+################################################################
+# Let's encrypt
+################################################################
+[acme]
+email = "admin@sgk.ovh"
+storageFile = "/etc/traefik/acme.json"
+entryPoint = "https"
+acmeLogging = true
+OnHostRule = true
+  [acme.dnsChallenge]
+  provider = "ovh"
+  delayBeforeCheck = 10
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "docker.checkit.skg.ovh"
+watch = true
+exposedByDefault = false
+usebindportip = true
+
+# Use Swarm Mode services as data provider.
+#
+# Optional
+# Default: false
+#
+swarmMode = false

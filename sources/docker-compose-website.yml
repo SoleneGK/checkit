@@ -1,0 +1,101 @@
+##############################################################################################
+# Server Infrastructure for checkit project - v1.O
+#---------------------------------------------------------------------------------------------
+# This stack is a web application stack for the checkit application
+#---------------------------------------------------------------------------------------------
+# Copyright (c) 2019, checkit
+# All rights reserved.
+##############################################################################################
+version: '3.2'
+
+services:
+  varnish:
+    image: jonbaldie/varnish
+    hostname: ${PROJECT_NAME}-varnish
+    container_name: ${PROJECT_NAME}-varnish
+    restart: always
+    depends_on:
+      - nginx
+    volumes:
+      - ../data/checkit/conf/varnish/default.vcl:/etc/varnish/default.vcl
+    labels:
+      - "traefik.frontend.rule=Host:${PROJECT_DOMAIN}"
+      - "traefik.port=80"
+      - "traefik.docker.network=frontend"
+      - "traefik.enable=true"
+    networks:
+      - frontend
+      - backend
+
+  nginx:
+    image: nginx:latest
+    container_name: ${PROJECT_NAME}-web
+    depends_on:
+      - checkit-app
+    # Montage des volumes    
+    volumes:
+      # Volumes src
+      - ./app:/app
+      # Chargement des config nginx
+      - ../data/checkit/conf/nginx/checkit.conf:/etc/nginx/conf.d/checkit.conf
+      # logging
+      - ../log/nginx:/var/log/nginx
+    hostname: ${PROJECT_NAME}-web
+    restart: always
+    networks:
+      - backend
+
+  checkit-app:
+   # based on image: php:7.1.12-fpm
+    container_name: ${PROJECT_NAME}-app
+    build:
+      context: ..
+      dockerfile: ./sources/custom-docker/php-fpm-symfony
+    image: php-fpm-symfony:lastet
+    volumes:
+      - ./app:/app
+      - ../data/checkit/conf/php/php-settings.conf:/usr/local/etc/php-fpm.d/php-settings.conf
+    hostname: ${PROJECT_NAME}-bo-app
+    restart: always
+    networks:
+      - backend
+      
+
+  mariadb:
+    container_name: ${PROJECT_NAME}-mysql
+    # image: mysql:latest
+    # rollbacked; reason: consistency
+    image: mariadb:10.4
+    environment: 
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}    
+      - MYSQL_DATABASE=${MYSQL_DATABASE} 
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes: 
+    # Mounting an external directory to keep data in case of docker shutdown  
+      - ../data/checkit/mysql.data-${SERVER_ENV}:/var/lib/mysql/:rw 
+    hostname: ${PROJECT_NAME}-mysql
+    restart: always
+    networks:
+      - backend
+
+  maria-admin:
+    container_name: ${PROJECT_NAME}-phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    hostname: ${PROJECT_NAME}-phpmyadmin
+    restart: always
+    networks:
+      - backend
+    environment: 
+      - PMA_HOST=mariadb
+    ports:
+      - "8081:80"
+
+networks:
+  frontend:
+    external:
+      name: ${PROXY_NETWORK_NAME:-frontend}
+  backend:
+    external:
+      name: ${APP_NETWORK_NAME:-application-internal}
+

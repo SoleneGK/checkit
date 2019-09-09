@@ -1,0 +1,57 @@
+##############################################################################################
+# ServerCore - v1.O
+#---------------------------------------------------------------------------------------------
+# This stack is a server stack for multi application docker server
+# It's based on Traefik and portainer, and must be used with the dedicated .env and control 
+# script provided.
+#---------------------------------------------------------------------------------------------
+# Copyright (c) 2018, Emmanuel LARGE
+# All rights reserved.
+##############################################################################################
+version: '3.2'
+
+services:
+  reverse-proxy:
+    image: traefik # The official Traefik docker image
+    container_name: ${PROXY_CONTAINER_NAME}
+    ports:
+      - "80:80"     # The HTTP port
+      - "443:443"
+      #- "8001:8001"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${SERVER_FILES_PATH}/traefik-data/:/etc/traefik
+    networks:
+      - frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:${MONITOR_DOMAIN}" 
+      - "traefik.frontend.auth.basic=${SERVER_BASIC_AUTH}"     
+      - "traefik.docker.network=frontend"
+      - "traefik.port=8001"
+    environment:
+      - OVH_ENDPOINT=ovh-eu
+      - OVH_APPLICATION_KEY=7ugApP5U8PhMmS56
+      - OVH_APPLICATION_SECRET=iU920LHw32mBM3pGuaTjylkBRPWFtrvL
+      - OVH_CONSUMER_KEY=l5VKDT0nKxNv3orgNj9cSVDyf4a9LSV3
+    restart: always
+
+  portainer:
+    container_name: ${PORTAINER_CONTAINER_NAME}
+    restart: always
+    image: portainer/portainer
+    volumes:
+      - ${SERVER_FILES_PATH}/portainer-data/:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.frontend.rule=Host:${PORTAINER_DOMAIN}"
+      - "traefik.port=9000"
+      - "traefik.docker.network=frontend"
+      - "traefik.enable=true"
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external:
+      name: ${PROXY_NETWORK_NAME:-frontend}
