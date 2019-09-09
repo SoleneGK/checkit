@@ -14,7 +14,7 @@ class DisplayTaskController extends AbstractController
 {
     /**
      * @Route("/taches/priorite", name="display_task_by_priority")
-     * @Route("/taches)
+     * @Route("/taches")
      */
     public function index()
     {
