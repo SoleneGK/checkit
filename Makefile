@@ -109,7 +109,7 @@ bash-app:
 	docker exec -ti checkit-app bash
 
 bash-mysql:
-	docker exec -ti checkit-maria bash
+	docker exec -ti checkit-mariadb bash
 
 bash-phpmyadmin:
 	docker exec -ti checkit-phpmyadmin bash
