@@ -83,9 +83,9 @@ down-core:
 #### Application
 ##########################################################
 up-app:
-	docker-compose -f checkit/docker-compose-website.yml -p $(PROJECT_NAME) up -d
+	docker-compose -f sources/docker-compose-website.yml -p $(PROJECT_NAME) up -d
 down-app:
-	docker-compose -f checkit/docker-compose-website.yml -p $(PROJECT_NAME) down
+	docker-compose -f sources/docker-compose-website.yml -p $(PROJECT_NAME) down
 
 set-permissions:
 	docker exec checkit-app chown www-data /var/lib/

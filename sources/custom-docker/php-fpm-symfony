@@ -1,14 +1,46 @@
 FROM php:7.3-fpm
+MAINTAINER Emmanuel LARGE <GorkamWorka@gmail.com> 
 
-MAINTAINER Emmanuel LARGE
+ENV DEBIAN_FRONTEND noninteractive 
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils \
+        && apt-get install -y software-properties-common \
+        && apt-get install \ 
+        git \ 
+        zip \ 
+        unzip \
+        ssl-cert \
+        libicu-dev \
+        nano \
+        mysql-client\
+        -y --no-install-recommends
+        
+# Adding a managed php.ini
+ADD ./sources/custom-docker/conf/php.ini /usr/local/etc/php/php.ini
 
+# Install de Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+        && php composer-setup.php \ -r "unlink('composer-setup.php'); echo 'test';" \
+        && mv composer.phar /usr/local/bin/composer
+
+
+RUN docker-php-ext-install pdo_mysql \
+        && docker-php-ext-install intl \
+        && docker-php-ext-enable opcache
+
+#install Imagemagick & PHP Imagick ext
 RUN apt-get update && apt-get install -y \
-    php-fpm \
-    php-mcrypt \
-    php-mysql \
-    php-apcu \
-    php-curl \
-    php-intl \
-    php-xdebug \
-    php-xml \
-    php-zip
+        libmagickwand-dev --no-install-recommends
+
+RUN pecl install imagick \
+        && docker-php-ext-enable imagick \
+        && pecl install xdebug-2.6.1 \
+        && docker-php-ext-enable xdebug
+
+WORKDIR /app
+
+EXPOSE 9000
+CMD ["php-fpm"]
+
+
+
+

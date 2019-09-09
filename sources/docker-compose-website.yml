@@ -50,8 +50,8 @@ services:
     container_name: ${PROJECT_NAME}-app
     build:
       context: ..
-      dockerfile: ./checkit/custom-docker/checkit
-    image: checkit:lastet
+      dockerfile: ./sources/custom-docker/php-fpm-symfony
+    image: php-fpm-symfony:lastet
     volumes:
       - ./app:/app
       - ../data/checkit/conf/php/php-settings.conf:/usr/local/etc/php-fpm.d/php-settings.conf
