@@ -96,7 +96,7 @@ set-permissions:
 install:
 	make up
 	docker exec checkit-app composer install
-	docker exec checkit-app php bin/console doctrine:schema:create --env=dev
+	docker exec checkit-app php bin/console doctrine:schema:create
 	make restart
 
 ######################################
