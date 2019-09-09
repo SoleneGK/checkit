@@ -61,7 +61,7 @@ services:
       - backend
       
 
-  mysql:
+  mariadb:
     container_name: ${PROJECT_NAME}-mysql
     # image: mysql:latest
     # rollbacked; reason: consistency

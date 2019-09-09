@@ -1,4 +1,20 @@
 doctrine:
+    dbal:
+        # configure these for your database server
+        dbname: checkit
+        # si mariadb est sur docker
+        #host: 172.17.0.2
+        # dans les autres cas
+        host: mariadb
+        port: 3306
+        user: doctrine_user
+        password: vnuk51s8isl8
+        driver: pdo_mysql
+        server_version: mariadb-10.4.7
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
     orm:
         auto_generate_proxy_classes: false
         metadata_cache_driver:
