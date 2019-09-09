@@ -73,7 +73,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes: 
     # Mounting an external directory to keep data in case of docker shutdown  
-      - ../data/checkit/mysql.data-${ENV}:/var/lib/mysql/:rw 
+      - ../data/checkit/mysql.data-${SERVER_ENV}:/var/lib/mysql/:rw 
     hostname: ${PROJECT_NAME}-mysql
     restart: always
     networks:
