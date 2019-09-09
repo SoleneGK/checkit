@@ -23,5 +23,4 @@ USER www-data
 RUN $COMPOSER_COMMAND global require hirak/prestissimo:^0.3 \
  && $COMPOSER_COMMAND global require roave/security-advisories:dev-master
 
-USER root
 USER www-data
