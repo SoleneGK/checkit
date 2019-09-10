@@ -1,0 +1,36 @@
+{% extends "app/index.html.twig" %}
+
+{% block content %}
+	{% if critical_tasks %}
+		<h2>Critique</h2>
+
+		{% for task in critical_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if important_tasks %}
+		<h2>Important</h2>
+
+		{% for task in important_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if normal_tasks %}
+		<h2>Normal</h2>
+
+		{% for task in normal_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if optional_tasks %}
+		<h2>Optionnel</h2>
+
+		{% for task in optional_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+	
+{% endblock %}
