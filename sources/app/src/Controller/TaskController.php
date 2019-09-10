@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 class TaskController extends AbstractController
 {
 	/**
-	 * @Route("/taches/ajouter", name="task_creation")
+	 * @Route("/tache/ajouter", name="task_creation")
 	 */
 	public function addTask(Request $request): Response
 	{
@@ -46,7 +46,7 @@ class TaskController extends AbstractController
 	}
 	
 	/**
-	 * @Route("/taches/{task_id}/modifier", name="task_modification")
+	 * @Route("/tache/{task_id}/modifier", name="task_modification")
 	 */
 	public function modifyTask(Request $request, int $task_id, LoggerInterface $logger): Response
 	{
@@ -100,9 +100,9 @@ class TaskController extends AbstractController
 	}
 
 	/**
-	 * @Route("/taches/{id}", name="task_details")
+	 * @Route("/tache/{task_id}", name="task_details")
 	 */
-	public function displayTaskDetails(Task $task)
+	public function displayTaskDetails(Task $task, int $task_id)
 	{
 		$user = $this->getUser();
 

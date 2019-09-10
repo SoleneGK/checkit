@@ -16,7 +16,7 @@ use App\Entity\Periodicity;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190904205838 extends AbstractMigration implements ContainerAwareInterface
+final class Version20190904213517 extends AbstractMigration implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
