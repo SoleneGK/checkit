@@ -243,7 +243,7 @@ class Task
 
 	private function getCurrentDayAtMidnight()
 	{
-		$current_date = new DateTime();
+		$current_date = new \DateTime();
 		$current_date->setTime(0, 0, 0);
 
 		return $current_date;
@@ -251,7 +251,7 @@ class Task
 
 	private function getFirstDayOfCurrentWeek()
 	{
-		$first_day_current_week = new DateTime();
+		$first_day_current_week = new \DateTime();
 		$first_day_current_week->setTime(0, 0, 0);
 
 		$current_week_day = $first_day_current_week->format('w');
@@ -273,7 +273,7 @@ class Task
 
 	private function getFirstDayOfCurrentMonth()
 	{
-		$first_day_current_month = new DateTime();
+		$first_day_current_month = new \DateTime();
 		$first_day_current_month->setTime(0, 0, 0);
 
 		$current_month = $first_day_current_month->format('m');
@@ -292,7 +292,7 @@ class Task
 		$is_today = false;
 		$periodicity_code = $this->getPeriodicity()->getCode();
 		$day_of_activation = substr($periodicity_code, 1);
-		$today = new DateTime();
+		$today = new \DateTime();
 
 		if ($periodicity_code[0] == 'W')
 		{

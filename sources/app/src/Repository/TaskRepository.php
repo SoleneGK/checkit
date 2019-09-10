@@ -31,6 +31,19 @@ class TaskRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllByPeriodicityAndOwner($periodicity_code, $user_id)
+    {
+        return $this->createQueryBuilder('t')
+            ->innerJoin('t.periodicity', 'p')
+            ->andWhere('p.code like :periodicity_code')
+            ->setParameter('periodicity_code', $periodicity_code)
+            ->andWhere('t.owner = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findWithUserVerification($task_id, $user_id)
     {
         return $this->createQueryBuilder('t')

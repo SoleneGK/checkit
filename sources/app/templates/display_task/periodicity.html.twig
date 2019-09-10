@@ -1,0 +1,36 @@
+{% extends "app/index.html.twig" %}
+
+{% block content %}
+	{% if daily_tasks %}
+		<h2>Quotidiennes</h2>
+
+		{% for task in daily_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if weekly_tasks %}
+		<h2>Hebdomadaires</h2>
+
+		{% for task in weekly_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if monthly_tasks %}
+		<h2>Mensuelles</h2>
+
+		{% for task in monthly_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if unique_tasks %}
+		<h2>Uniques</h2>
+
+		{% for task in unique_tasks %}
+			<div>{{ task.title }}</div>
+		{% endfor %}
+	{% endif %}
+	
+{% endblock %}
