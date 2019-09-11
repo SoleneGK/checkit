@@ -35,14 +35,24 @@ class EditionModeController extends AbstractController
 		$normal_tasks = $task_repo->findAllByPriorityAndOwner(2, $user_id);
 		$optional_tasks = $task_repo->findAllByPriorityAndOwner(1, $user_id);
 
-		return $this->render('edition_mode/priority.html.twig', [
-			'display_mode' => 'edition',
-			'sort_mode' => 'priority',
-			'critical_tasks' => $critical_tasks,
-			'important_tasks' => $important_tasks,
-			'normal_tasks' => $normal_tasks,
-			'optional_tasks' => $optional_tasks,
-		]);
+		if (count($critical_tasks) == 0 && count($important_tasks) == 0 && count($normal_tasks) == 0 && count($optional_tasks) == 0)
+		{
+			return $this->render('display_task/no_task.html.twig', [
+				'display_mode' => 'edition',
+				'sort_mode' => 'priority',
+			]);
+		}
+		else
+		{
+			return $this->render('edition_mode/priority.html.twig', [
+				'display_mode' => 'edition',
+				'sort_mode' => 'priority',
+				'critical_tasks' => $critical_tasks,
+				'important_tasks' => $important_tasks,
+				'normal_tasks' => $normal_tasks,
+				'optional_tasks' => $optional_tasks,
+			]);
+		}
 	}
 
 	/**
@@ -60,13 +70,23 @@ class EditionModeController extends AbstractController
 		$weekly_tasks = $task_repo->findAllByPeriodicityAndOwner("W%", $user_id);
 		$monthly_tasks = $task_repo->findAllByPeriodicityAndOwner("M%", $user_id);
 
-		return $this->render('edition_mode/periodicity.html.twig', [
-			'display_mode' => 'edition',
-			'sort_mode' => 'periodicity',
-			'unique_tasks' => $unique_tasks,
-			'daily_tasks' => $daily_tasks,
-			'weekly_tasks' => $weekly_tasks,
-			'monthly_tasks' => $monthly_tasks,
-		]);
+		if (count($critical_tasks) == 0 && count($important_tasks) == 0 && count($normal_tasks) == 0 && count($optional_tasks) == 0)
+		{
+			return $this->render('display_task/no_task.html.twig', [
+				'display_mode' => 'edition',
+				'sort_mode' => 'periodicity',
+			]);
+		}
+		else
+		{
+			return $this->render('edition_mode/periodicity.html.twig', [
+				'display_mode' => 'edition',
+				'sort_mode' => 'periodicity',
+				'unique_tasks' => $unique_tasks,
+				'daily_tasks' => $daily_tasks,
+				'weekly_tasks' => $weekly_tasks,
+				'monthly_tasks' => $monthly_tasks,
+			]);
+		}
 	}
 }

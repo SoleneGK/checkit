@@ -16,11 +16,11 @@
 		{{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control mb-3'}}) }}
 		{{ form_errors(registrationForm.email) }}
 
-		{{ form_label(registrationForm.password.first) }}
-		{{ form_widget(registrationForm.password.first, { 'attr': {'class': 'form-control mb-3'}}) }}
+		{{ form_label(registrationForm.plainPassword.first) }}
+		{{ form_widget(registrationForm.plainPassword.first, { 'attr': {'class': 'form-control mb-3'}}) }}
 
-		{{ form_label(registrationForm.password.second) }}
-		{{ form_widget(registrationForm.password.second, { 'attr': {'class': 'form-control mb-3'}}) }}	
+		{{ form_label(registrationForm.plainPassword.second) }}
+		{{ form_widget(registrationForm.plainPassword.second, { 'attr': {'class': 'form-control mb-3'}}) }}	
 
 
 		<div class="my-4">
