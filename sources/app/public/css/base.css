@@ -136,6 +136,7 @@ button a:hover {
     display: flex;
     justify-content: space-around;
     font-size: 40px;
+    align-items: center;
 }
 
 .btn-action {
@@ -148,6 +149,8 @@ button a:hover {
     margin: 5px;
     padding: 5px 10px;
     border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .critical_task {
@@ -165,6 +168,65 @@ button a:hover {
 .inactive_task {
     background-color: rgba(49, 60, 72, 0.4);
 }
+
+.task_edition_buttons {
+    display: flex;
+    justify-content: space-around;
+    font-size: 30px;
+}
+
+/* Toggle checkbox */
+.toggle_switch {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 34px;
+    margin: 0;
+}
+
+.toggle_switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle_slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1d1f2a;
+    transition: .4s;
+    -webkit-transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle_slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #313c48;
+    transition: .4s;
+    -webkit-transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle_slider {
+    background-color: #92d050;
+}
+
+input:checked + .toggle_slider:before {
+    transform: translateX(26px);
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+}
+
+/* Toggle checkbox end */
 
 @media all and (min-width: 768px) {
     .content {

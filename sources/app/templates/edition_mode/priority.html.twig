@@ -6,15 +6,7 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Critiques</h2>
 
-		{% for task in critical_tasks %}
-			{% if task.active %}
-				<div class="task critical_task">
-			{% else %}
-				<div class="task critical_task inactive_task">
-			{% endif %}
-				{{ task.title }}
-			</div>
-		{% endfor %}
+		{{ _self.display_task_list(critical_tasks, 'critical_task')}}
 	</div>
 	{% endif %}
 
@@ -22,15 +14,7 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Importantes</h2>
 
-		{% for task in important_tasks %}
-		{% if task.active %}
-			<div class="task important_task">
-		{% else %}
-			<div class="task important_task inactive_task">
-		{% endif %}
-		{{ task.title }}
-			</div>
-		{% endfor %}
+		{{ _self.display_task_list(important_tasks, 'important_task')}}
 	</div>
 	{% endif %}
 
@@ -38,15 +22,7 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Normales</h2>
 
-		{% for task in normal_tasks %}
-		{% if task.active %}
-			<div class="task normal_task">
-		{% else %}
-			<div class="task normal_task inactive_task">
-		{% endif %}
-		{{ task.title }}
-			</div>
-		{% endfor %}
+		{{ _self.display_task_list(normal_tasks, 'normal_task')}}
 	</div>
 	{% endif %}
 
@@ -54,19 +30,29 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Optionnelles</h2>
 
-		{% for task in optional_tasks %}
-		{% if task.active %}
-			<div class="task optional_task">
-		{% else %}
-			<div class="task optional_task inactive_task">
-		{% endif %}
-
-				{{ task.title }}
-			</div>
-		{% endfor %}
+		{{ _self.display_task_list(optional_tasks, 'optional_task')}}
 	</div>
 	{% endif %}
 
 </div>
 	
 {% endblock %}
+
+{% macro display_task_list(task_list, priority_tag) %}
+	{% for task in task_list %}
+		{% if task.active %}
+			<div class="task {{ priority_tag }}">
+		{% else %}
+			<div class="task {{ priority_tag }} inactive_task">
+		{% endif %}
+
+			<div class="task_edition_title">{{ task.title }}</div>
+			<div class="task_edition_buttons">
+				<button type="button" class="btn-action"><a href="{{ path('task_details', {task_id: task.id}) }}"><span class="fas fa-ellipsis-v"></span></a></button>
+				<button type="button" class="btn-action"><a href="{{ path('task_modification', {task_id: task.id}) }}"><span class="fas fa-edit yellow_icon"></span></a></button>
+				<button type="button" class="btn-action" id="delete_task"><a href="{{ path('task_deletion', {task_id: task.id}) }}"><span class="fas fa-trash-alt red_icon"></span></a></button>
+			</div>
+
+		</div>
+	{% endfor %}
+{% endmacro %}

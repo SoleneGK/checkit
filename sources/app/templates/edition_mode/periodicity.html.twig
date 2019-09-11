@@ -6,12 +6,7 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Quotidiennes</h2>
 
-		{% for task in daily_tasks %}
-			{{ _self.div_task(task.priority.name, task.active) }}
-			{{ task.title }}
-			</div>
-		{% endfor %}
-	
+		{{ _self.display_task_list(daily_tasks) }}
 	</div>
 	{% endif %}
 
@@ -19,12 +14,7 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Hebdomadaires</h2>
 
-		{% for task in weekly_tasks %}
-			{{ _self.div_task(task.priority.name, task.active) }}
-			{{ task.title }}
-			</div>
-		{% endfor %}
-
+		{{ _self.display_task_list(weekly_tasks) }}
 	</div>
 	{% endif %}
 
@@ -32,12 +22,7 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Mensuelles</h2>
 
-		{% for task in monthly_tasks %}
-			{{ _self.div_task(task.priority.name, task.active) }}
-			{{ task.title }}
-			</div>
-		{% endfor %}
-
+		{{ _self.display_task_list(monthly_tasks) }}
 	</div>
 	{% endif %}
 
@@ -45,17 +30,28 @@
 	<div class="col-md-6 col-xl-4 p-3">
 		<h2 class="text-center">Uniques</h2>
 
-		{% for task in unique_tasks %}
-			{{ _self.div_task(task.priority.name, task.active) }}
-			{{ task.title }}
-			</div>
-		{% endfor %}
-
+		{{ _self.display_task_list(unique_tasks) }}
 	</div>	
 	{% endif %}
 </div>
 
 {% endblock %}
+
+{% macro display_task_list(task_list) %}
+	{% for task in task_list %}
+		{{ _self.div_task(task.priority.name, task.active) }}
+
+			<div class="task_edition_title">{{ task.title }}</div>
+			<div class="task_edition_buttons">
+				<button type="button" class="btn-action"><a href="{{ path('task_details', {task_id: task.id}) }}"><span class="fas fa-ellipsis-v"></span></a></button>
+				<button type="button" class="btn-action"><a href="{{ path('task_modification', {task_id: task.id}) }}"><span class="fas fa-edit yellow_icon"></span></a></button>
+				<button type="button" class="btn-action" id="delete_task"><a href="{{ path('task_deletion', {task_id: task.id}) }}"><span class="fas fa-trash-alt red_icon"></span></a></button>
+			</div>
+
+		</div>
+	{% endfor %}
+{% endmacro %}
+
 
 {% macro div_task(priority, active) %}
 	{% if priority == 'critique' %}
