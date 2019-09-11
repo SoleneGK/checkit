@@ -1,36 +1,86 @@
 {% extends "app/index.html.twig" %}
 
 {% block content %}
+<div class="row mx-4">
 	{% if daily_tasks %}
-		<h2>Quotidiennes</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Quotidiennes</h2>
 
 		{% for task in daily_tasks %}
-			<div>{{ task.title }}</div>
+			{{ _self.div_task(task.priority.name, task.active) }}
+			{{ task.title }}
+			</div>
 		{% endfor %}
+	
+	</div>
 	{% endif %}
 
 	{% if weekly_tasks %}
-		<h2>Hebdomadaires</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Hebdomadaires</h2>
 
 		{% for task in weekly_tasks %}
-			<div>{{ task.title }}</div>
+			{{ _self.div_task(task.priority.name, task.active) }}
+			{{ task.title }}
+			</div>
 		{% endfor %}
+
+	</div>
 	{% endif %}
 
 	{% if monthly_tasks %}
-		<h2>Mensuelles</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Mensuelles</h2>
 
 		{% for task in monthly_tasks %}
-			<div>{{ task.title }}</div>
+			{{ _self.div_task(task.priority.name, task.active) }}
+			{{ task.title }}
+			</div>
 		{% endfor %}
+
+	</div>
 	{% endif %}
 
 	{% if unique_tasks %}
-		<h2>Uniques</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Uniques</h2>
 
 		{% for task in unique_tasks %}
-			<div>{{ task.title }}</div>
+			{{ _self.div_task(task.priority.name, task.active) }}
+			{{ task.title }}
+			</div>
 		{% endfor %}
+
+	</div>	
 	{% endif %}
-	
+</div>
+
 {% endblock %}
+
+{% macro div_task(priority, active) %}
+	{% if priority == 'critique' %}
+		{% if active %}
+			<div class="task critical_task">
+		{% else %}
+			<div class="task critical_task inactive_task">
+		{% endif %}
+	{% elseif priority == 'importante' %}
+		{% if active %}
+			<div class="task important_task">
+		{% else %}
+			<div class="task important_task inactive_task">
+		{% endif %}
+	{% elseif priority == 'normale' %}
+		{% if active %}
+			<div class="task normal_task">
+		{% else %}
+			<div class="task normal_task inactive_task">
+		{% endif %}
+	{% else %}
+		{% if active %}
+			<div class="task optional_task">
+		{% else %}
+			<div class="task optional_task inactive_task">
+		{% endif %}
+	{% endif %}
+{% endmacro %}

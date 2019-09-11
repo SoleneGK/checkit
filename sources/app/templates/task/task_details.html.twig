@@ -19,7 +19,7 @@
 
 	<div class="action_bar">
 		<button type="button" class="btn-action"><a href="{{ path('task_modification', {task_id: task.id}) }}"><span class="fas fa-edit yellow_icon"></span></a></button>
-		<button type="button" class="btn-action"><a href="{{ path('task_deletion', {task_id: task.id}) }}"><span class="fas fa-trash-alt red_icon"></span></a></button>
+		<button type="button" class="btn-action" id="delete_task"><a href="{{ path('task_deletion', {task_id: task.id}) }}"><span class="fas fa-trash-alt red_icon"></span></a></button>
 	</div>
 </div>
 {% endblock %}

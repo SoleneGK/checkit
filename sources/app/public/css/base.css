@@ -3,6 +3,7 @@ body {
     color: #3bc1ff;
     font-family: Asap, sans-serif;
     height: 100vh;
+    font-size: 16px;
 }
 
 .container {
@@ -20,6 +21,7 @@ body {
 h1 {
     font-family: Oswald, sans-serif;
     font-size: 58px;
+    margin: 10px;
 }
 
 h1 a:hover {
@@ -28,6 +30,9 @@ h1 a:hover {
 
 h2 {
     font-family: Oswald, sans-serif;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 a, a:hover {
@@ -136,6 +141,29 @@ button a:hover {
 .btn-action {
     background: none;
     border:none;
+}
+
+.task {
+    background-color: #313c48;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: .5rem;
+}
+
+.critical_task {
+    border: 2px solid #c93629;
+}
+
+.important_task {
+    border: 2px solid #3bc1ff;
+}
+
+.optional_task {
+    font-style:italic;
+}
+
+.inactive_task {
+    background-color: rgba(49, 60, 72, 0.4);
 }
 
 @media all and (min-width: 768px) {

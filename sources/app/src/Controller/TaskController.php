@@ -62,6 +62,8 @@ class TaskController extends AbstractController
 		$task = $entityManager->getRepository(Task::class)->findOneById($task_id);
 
 		if ($task->getOwner()->getId() == $user->getId() && $task->getDeleted() == false) {
+			$task->isActive();
+
 			return $this->render('task/task_details.html.twig', [
 				'display_mode' => 'normal',
 				'sort_mode' => 'priority',

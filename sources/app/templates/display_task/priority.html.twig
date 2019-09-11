@@ -1,36 +1,55 @@
 {% extends "app/index.html.twig" %}
 
 {% block content %}
+<div class="row mx-4">
 	{% if critical_tasks %}
-		<h2>Critique</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Critiques</h2>
 
 		{% for task in critical_tasks %}
-			<div>{{ task.title }}</div>
+			<div class="task critical_task">
+				{{ task.title }}
+			</div>
 		{% endfor %}
+	</div>
 	{% endif %}
 
 	{% if important_tasks %}
-		<h2>Important</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Importantes</h2>
 
 		{% for task in important_tasks %}
-			<div>{{ task.title }}</div>
+			<div class="task important_task">
+				{{ task.title }}
+			</div>
 		{% endfor %}
+	</div>
 	{% endif %}
 
 	{% if normal_tasks %}
-		<h2>Normal</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Normales</h2>
 
 		{% for task in normal_tasks %}
-			<div>{{ task.title }}</div>
+			<div class="task normal_task">
+				{{ task.title }}
+			</div>
 		{% endfor %}
+	</div>
 	{% endif %}
 
 	{% if optional_tasks %}
-		<h2>Optionnel</h2>
+	<div class="col-md-6 col-xl-4 p-3">
+		<h2 class="text-center">Optionnelles</h2>
 
 		{% for task in optional_tasks %}
-			<div>{{ task.title }}</div>
+			<div class="task optional_task">
+				{{ task.title }}
+			</div>
 		{% endfor %}
+	</div>
 	{% endif %}
-	
+
+</div>
+
 {% endblock %}

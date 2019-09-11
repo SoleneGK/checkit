@@ -76,7 +76,7 @@ class DisplayTaskController extends AbstractController
 		$weekly_tasks = $task_repo->findAllByPeriodicityAndOwner("W%", $user_id);
 		$monthly_tasks = $task_repo->findAllByPeriodicityAndOwner("M%", $user_id);
 
-		if (count($critical_tasks) == 0 && count($important_tasks) == 0 && count($normal_tasks) == 0 && count($optional_tasks) == 0)
+		if (count($unique_tasks) == 0 && count($daily_tasks) == 0 && count($weekly_tasks) == 0 && count($monthly_tasks) == 0)
 		{
 			return $this->render('display_task/no_task.html.twig', [
 				'display_mode' => 'normal',
