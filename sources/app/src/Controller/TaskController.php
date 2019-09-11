@@ -35,20 +35,49 @@ class TaskController extends AbstractController
 			$entityManager->persist($task);
 			$entityManager->flush();
 
-			return $this->render('task/task_creation_success.html.twig');
+			return $this->render('task/task_creation_success.html.twig', [
+				'task' => $task,
+				'display_mode' => 'normal',
+				'sort_mode' => 'priority',
+			]);
 		}
 		else
 		{
 			return $this->render('task/task_creation.html.twig', [
+				'display_mode' => 'normal',
+				'sort_mode' => 'priority',
 				'taskForm' => $form->createView(),
 			]);
 		}
 	}
 	
 	/**
+	 * @Route("/tache/{task_id}", name="task_details")
+	 */
+	public function displayTaskDetails(int $task_id)
+	{
+		$user = $this->getUser();
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$task = $entityManager->getRepository(Task::class)->findOneById($task_id);
+
+		if ($task->getOwner()->getId() == $user->getId() && $task->getDeleted() == false) {
+			return $this->render('task/task_details.html.twig', [
+				'display_mode' => 'normal',
+				'sort_mode' => 'priority',
+				'task' => $task,
+			]);    
+		}
+		else
+		{
+			return $this->redirectToRoute('index');
+		}
+	}
+
+	/**
 	 * @Route("/tache/{task_id}/modifier", name="task_modification")
 	 */
-	public function modifyTask(Request $request, int $task_id, LoggerInterface $logger): Response
+	public function modifyTask(Request $request, int $task_id): Response
 	{
 		$user_id = $this->getUser()->getId();
 
@@ -56,10 +85,9 @@ class TaskController extends AbstractController
 		$original_task = $entityManager->getRepository(Task::class)->findWithUserVerification($task_id, $user_id);
 
 		// Check that the task is owned by current user
-		if (count($original_task) > 0)
+		if (count($original_task) > 0 && $original_task[0]->getDeleted() == false)
 		{
 			$original_task = $original_task[0];
-			$logger->info($original_task->getPriority()->getId());
 			$displayed_task = new Task();
 			$displayed_task->copy($original_task);
 
@@ -80,6 +108,8 @@ class TaskController extends AbstractController
 				else
 				{
 					return $this->render('task/task_modification.html.twig', [
+						'display_mode' => 'normal',
+						'sort_mode' => 'priority',		
 						'taskForm' => $form->createView(),
 						'task' => $displayed_task,
 					]);
@@ -88,6 +118,8 @@ class TaskController extends AbstractController
 			else
 			{
 				return $this->render('task/task_modification.html.twig', [
+					'display_mode' => 'normal',
+					'sort_mode' => 'priority',
 					'taskForm' => $form->createView(),
 					'task' => $displayed_task,
 				]);
@@ -100,20 +132,21 @@ class TaskController extends AbstractController
 	}
 
 	/**
-	 * @Route("/tache/{task_id}", name="task_details")
+	 * @Route("tache/{task_id}/supprimer", name="task_deletion")
 	 */
-	public function displayTaskDetails(Task $task, int $task_id)
+	public function	deleteTask(int $task_id)
 	{
-		$user = $this->getUser();
+		$user_id = $this->getUser()->getId();
 
-		if ($task->getOwner()->getId() == $user->getId()) {
-			return $this->render('task/task_details.html.twig', [
-				'task' => $task,
-			]);    
-		}
-		else
+		$entityManager = $this->getDoctrine()->getManager();
+		$task = $entityManager->getRepository(Task::class)->findWithUserVerification($task_id, $user_id);
+
+		if (count($task) > 0)
 		{
-			return $this->redirectToRoute('index');
+			$task[0]->setDeleted(true);
+			$entityManager->flush();
 		}
+
+		return $this->redirectToRoute('index');
 	}
 }

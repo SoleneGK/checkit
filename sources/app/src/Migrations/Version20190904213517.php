@@ -34,7 +34,7 @@ final class Version20190904213517 extends AbstractMigration implements Container
     {
         $manager = $this->container->get('doctrine.orm.entity_manager');
 
-        $priorities_list = ['optionnel', 'normal', 'important', 'critique'];
+        $priorities_list = ['optionnelle', 'normale', 'importante', 'critique'];
 
         foreach ($priorities_list as $name) {
             $priority = new Priority();

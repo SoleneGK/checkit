@@ -59,6 +59,13 @@ class Task
 	 */
 	private $last_execution_date;
 
+	private $active;
+
+    /**
+     * @ORM\Column(type="boolean", options = {"default": false})
+     */
+    private $deleted;
+
 	public function getId(): ?int
 	{
 		return $this->id;
@@ -188,7 +195,7 @@ class Task
 		$periodicity = $this->getPeriodicity()->getCode();
 		$is_active = false;
 		$current_date = new \DateTime();
-
+	
 		if ($this->getStartDate() < $current_date)
 		{
 			if ($periodicity == "U")
@@ -238,6 +245,7 @@ class Task
 			}
 		}
 
+		$this->active = $is_active;
 		return $is_active;
 	}
 
@@ -253,7 +261,7 @@ class Task
 	{
 		$first_day_current_week = new \DateTime();
 		$first_day_current_week->setTime(0, 0, 0);
-
+	
 		$current_week_day = $first_day_current_week->format('w');
 		
 		if ($current_week_day == 0)
@@ -264,7 +272,7 @@ class Task
 		{
 			$days_to_substract = - ($current_week_day - 1);
 		}
-
+	
 		$interval = new DateInterval('P' . $days_to_substract . 'D');
 		$first_day_current_week->sub($interval);
 		
@@ -275,13 +283,18 @@ class Task
 	{
 		$first_day_current_month = new \DateTime();
 		$first_day_current_month->setTime(0, 0, 0);
-
+	
 		$current_month = $first_day_current_month->format('m');
 		$current_year = $first_day_current_month->format('Y');
-
+	
 		$first_day_current_month->setDate(1, $current_month, $current_year);
-
+	
 		return $first_day_current_month;
+	}
+
+	public function getActive()
+	{
+		return $this->active;
 	}
 
 	/**
@@ -293,11 +306,11 @@ class Task
 		$periodicity_code = $this->getPeriodicity()->getCode();
 		$day_of_activation = substr($periodicity_code, 1);
 		$today = new \DateTime();
-
+	
 		if ($periodicity_code[0] == 'W')
 		{
 			$current_day_of_the_week = $today->format('w') + 1;
-
+	
 			if ($day_of_activation == $current_day_of_the_week)
 			{
 				$is_today = true;
@@ -306,13 +319,13 @@ class Task
 		else
 		{
 			$current_day_of_the_month = $today->format('d');
-
+	
 			if ($day_of_activation == $current_day_of_the_month)
 			{
 				$is_today = true;
 			}
 		}
-
+	
 		return $is_today;
 	}
 
@@ -324,102 +337,6 @@ class Task
 		$this->setLastExecutionDate(new \DateTime());
 	}
 
-	/**
-	 * 
-	 */
-
-	public function toLog()
-	{
-		$log = "id : ";
-		if (is_null($this->getId()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getId();
-		}
-		$log .= " / ";
-	
-		$log .= "title : ";
-		if (is_null($this->getTitle()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getTitle();
-		}
-		$log .= " / ";
-	
-		$log .= "description : ";
-		if (is_null($this->getDescription()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getDescription();
-		}
-		$log .= " / ";
-		
-		$log .= "startDate : ";
-		if (is_null($this->getStartDate()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getStartDate()->format('d-m-Y');
-		}
-		$log .= " / ";
-	
-		$log .= "endDate : ";
-		if (is_null($this->getEndDate()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getEndDate()->format('d-m-Y');
-		}
-		$log .= " / ";
-	
-		$log .= "owner : ";
-		if (is_null($this->getOwner()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getOwner()->getId();
-		}
-		$log .= " / ";
-	
-		$log .= "priority : ";
-		if (is_null($this->getPriority()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getPriority()->getName();
-		}
-		$log .= " / ";
-	
-		$log .= "periodicity : ";
-		if (is_null($this->getPeriodicity()))
-		{
-			$log .= "null";
-		}
-		else
-		{
-			$log .= $this->getPeriodicity()->getName();
-		}
-	
-		return $log;
-	}
-
 	public function getLastExecutionDate(): ?\DateTimeInterface
 	{
 		return $this->last_execution_date;
@@ -428,7 +345,19 @@ class Task
 	public function setLastExecutionDate(?\DateTimeInterface $last_execution_date): self
 	{
 		$this->last_execution_date = $last_execution_date;
-
+	
 		return $this;
 	}
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
 }

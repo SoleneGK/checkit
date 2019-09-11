@@ -42,6 +42,8 @@ class DisplayTaskController extends AbstractController
 		$filtered_optional_tasks = $this->filterActiveTasks($optional_tasks);
 
 		return $this->render('display_task/priority.html.twig', [
+			'display_mode' => 'normal',
+			'sort_mode' => 'priority',
 			'critical_tasks' => $filtered_critical_tasks,
 			'important_tasks' => $filtered_important_tasks,
 			'normal_tasks' => $filtered_normal_tasks,
@@ -71,6 +73,8 @@ class DisplayTaskController extends AbstractController
 		$filtered_monthly_tasks = $this->filterActiveTasks($monthly_tasks);
 
 		return $this->render('display_task/periodicity.html.twig', [
+			'display_mode' => 'normal',
+			'sort_mode' => 'periodicity',
 			'unique_tasks' => $filtered_unique_tasks,
 			'daily_tasks' => $filtered_daily_tasks,
 			'weekly_tasks' => $filtered_weekly_tasks,

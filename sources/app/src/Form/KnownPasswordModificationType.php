@@ -48,9 +48,6 @@ class KnownPasswordModificationType extends AbstractType
 				'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
 				'required' => true,
 			])
-			->add('submit', SubmitType::class, [
-				'label' => 'Modifier',
-			])
 		;
 	}
 

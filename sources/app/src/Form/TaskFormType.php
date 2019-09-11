@@ -20,25 +20,37 @@ class TaskFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'required' => true,
+                'label' => 'Titre',
+                'attr' => [
+                    'placeholder' => 'titre',
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'required' => false,
+                'label' => 'Description',
+                'attr' => [
+                    'placeholder' => 'description (optionnelle)',
+                ]
             ])
             ->add('start_date', DateType::class, [
                 'widget' => 'single_text',
+                'label' => 'Date de début',
             ])
             ->add('end_date', DateType::class, [
                 'widget' => 'single_text',
                 'required' => false,
+                'label' => 'Date de fin',
             ])
             ->add('priority', EntityType::class, [
                 'class' => Priority::class,
                 'choice_label' => 'name',
+                'label' => 'Priorité',
             ])
             ->add('periodicity', EntityType::class, [
                 'class' => Periodicity::class,
                 'choice_label' => 'name',
-                'choice_value' => 'code'
+                'choice_value' => 'code',
+                'label' => 'Périodicité'
             ])
         ;
     }

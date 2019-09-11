@@ -26,6 +26,7 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter('priority_id', $priority_id)
             ->andWhere('t.owner = :user_id')
             ->setParameter('user_id', $user_id)
+            ->andWhere('t.deleted = false')
             ->getQuery()
             ->getResult()
         ;
@@ -39,6 +40,7 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter('periodicity_code', $periodicity_code)
             ->andWhere('t.owner = :user_id')
             ->setParameter('user_id', $user_id)
+            ->andWhere('t.deleted = false')
             ->getQuery()
             ->getResult()
         ;
@@ -51,6 +53,7 @@ class TaskRepository extends ServiceEntityRepository
             ->setParameter('task_id', $task_id)
             ->andWhere('t.owner = :user_id')
             ->setParameter('user_id', $user_id)
+            ->andWhere('t.deleted = false')
             ->getQuery()
             ->getResult()
         ;

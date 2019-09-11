@@ -2,27 +2,111 @@
 
 {% block body %}
 <div class="container m-0 p-0 w-100">
-	<div class="row">
+	<div class="d-flex content">
 		<!-- Menu -->
-		<div class="col-3 menu">
+		<div class="menu">
             <h1 class="text-center"><a href="{{ path('index') }}">Check it</a></h1>
-            Hello {{ app.user.username }}
 	
-			<nav class="row">
-				<div class="col-6"><a href="{{ path('task_creation') }}"></a><span class="fas fa-plus"></span></a></div>
-				<div class="col-6"><a href="{{ path('task_creation') }}">Ajouter une tâche</a></div>
-				<div class="col-6"><span class="fas fa-tools"></span></div>
-				<div class="col-6">Passer en mode édition</div>
-				<div class="col-6"><span class="fas fa-sort-amount-up-alt"></span></div>
-				<div class="col-6">Trier par périodicité</div>
-				<div class="col-6"><span class="fas fa-user"></span></div>
-				<div class="col-6">Mon compte</div>
-				<div class="col-6"><a href="{{ path('app_logout') }}"><span class="fas fa-sign-out-alt"></span></a></div>
-				<div class="col-6"><a href="{{ path('app_logout') }}">Se déconnecter</a></div>
+			<nav>
+				<div class="menu_icons_block">
+					<div class="menu_icon icon_add"><a href="{{ path('task_creation') }}"></a><span class="fas fa-plus green_icon"></span></a></div>
+
+					<div class="menu_icon icon_display">
+						{% if display_mode == 'normal' %}
+							{% if sort_mode == 'priority' %}
+								<a href="{{ path('edition_mode_by_priority') }}">
+							{% else %}
+								<a href="{ path('edition_mode_by_periodicity') }}">
+							{% endif %}
+								
+							<span class="fas fa-tools yellow_icon">
+						{% else %}
+							{% if sort_mode == 'priority' %}
+								<a href="{{ path('display_tasks_by_priority') }}">
+							{% else %}
+								<a href="{{ path('display_tasks_by_periodicity') }}">
+							{% endif %}
+
+							<span class="fas fa-calendar-alt">
+						{% endif %}
+						</span></a>
+					</div>
+					
+					<div class="menu_icon icon_sort">
+						{% if sort_mode == 'priority' %}
+							{% if display_mode == 'normal' %}
+								<a href="{{ path('display_tasks_by_periodicity') }}">
+							{% else %}
+								<a href="{{ path('edition_mode_by_periodicity') }}">
+							{% endif %}
+						{% else %}
+							{% if display_mode == 'normal' %}
+								<a href="{{ path('display_tasks_by_priority') }}">
+							{% else %}
+								<a href="{{ path('edition_mode_by_priority') }}">
+							{% endif %}
+						{% endif %}
+						<span class="fas fa-sort-amount-up-alt"></span></a>
+					</div>
+
+					<div class="menu_icon icon_account"><a href="{{ path('account') }}"><span class="fas fa-user yellow_icon"></span></a></div>
+					<div class="menu_icon icon_logout"><a href="{{ path('app_logout') }}"><span class="fas fa-sign-out-alt red_icon"></span></a></div>
+					
+				</div>
+
+				<div class="menu_text_block">
+					<div class="menu_text"><a href="{{ path('task_creation') }}">Ajouter une tâche</a></div>
+
+					<div class="menu_text">
+						{% if display_mode == 'normal' %}
+							{% if sort_mode == 'priority' %}
+								<a href="{{ path('edition_mode_by_priority') }}">
+							{% else %}
+								<a href="{{ path('edition_mode_by_periodicity') }}">
+							{% endif %}
+								
+							Passer en mode édition
+						{% else %}
+							{% if sort_mode == 'priority' %}
+								<a href="{{ path('display_tasks_by_priority') }}">
+							{% else %}
+								<a href="{{ path('display_tasks_by_periodicity') }}">
+							{% endif %}
+
+							Afficher la liste des tâches
+						{% endif %}
+						</a>
+					</div>
+					
+					<div class="menu_text">
+						{% if sort_mode == 'priority' %}
+							{% if display_mode == 'normal' %}
+								<a href="{{ path('display_tasks_by_periodicity') }}">
+							{% else %}
+								<a href="{{ path('edition_mode_by_periodicity') }}">
+							{% endif %}
+
+							Trier par périodicité
+						{% else %}
+							{% if display_mode == 'normal' %}
+								<a href="{{ path('display_tasks_by_priority') }}">
+							{% else %}
+								<a href="{{ path('edition_mode_by_priority') }}">
+							{% endif %}
+
+							Trier par priorité
+						{% endif %}
+						</a>
+					</div>
+	
+					<div class="menu_text"><a href="{{ path('account') }}">Mon compte</a></div>
+					<div class="menu_text"><a href="{{ path('app_logout') }}">Se déconnecter</a></div>
+				</div>
 			</nav>
+
 		</div>
 	
-		<div class="col">
+		<div class="flex-grow-1">
 			{% block content %}{% endblock %}
 		</div>
 	</div>	

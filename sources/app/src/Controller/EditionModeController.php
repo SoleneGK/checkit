@@ -36,6 +36,8 @@ class EditionModeController extends AbstractController
 		$optional_tasks = $task_repo->findAllByPriorityAndOwner(1, $user_id);
 
 		return $this->render('edition_mode/priority.html.twig', [
+			'display_mode' => 'edition',
+			'sort_mode' => 'priority',
 			'critical_tasks' => $critical_tasks,
 			'important_tasks' => $important_tasks,
 			'normal_tasks' => $normal_tasks,
@@ -59,6 +61,8 @@ class EditionModeController extends AbstractController
 		$monthly_tasks = $task_repo->findAllByPeriodicityAndOwner("M%", $user_id);
 
 		return $this->render('edition_mode/periodicity.html.twig', [
+			'display_mode' => 'edition',
+			'sort_mode' => 'periodicity',
 			'unique_tasks' => $unique_tasks,
 			'daily_tasks' => $daily_tasks,
 			'weekly_tasks' => $weekly_tasks,

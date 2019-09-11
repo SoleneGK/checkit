@@ -43,6 +43,8 @@ class AccountController extends AbstractController
 		}
 
 		return $this->render('account/display.html.twig', [
+			'display_mode' => 'normal',
+			'sort_mode' => 'priority',
 			'controller_name' => 'AccountController',
 			'form' => $form->createView(),
 			'success_message' => $success_message,
