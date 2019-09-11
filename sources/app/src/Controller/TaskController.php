@@ -151,4 +151,47 @@ class TaskController extends AbstractController
 
 		return $this->redirectToRoute('index');
 	}
+
+	/**
+	 * @Route("tache/{task_id}/valider", name="task_validation")
+	 */
+	public function validateTask(int $task_id, LoggerInterface $logger)
+	{
+		$user_id = $this->getUser()->getId();
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$task = $entityManager->getRepository(Task::class)->findWithUserVerification($task_id, $user_id);
+
+		if (count($task) > 0)
+		{
+			$logger->info('ok');
+			$task[0]->validate();
+			$entityManager->flush();
+		}
+
+		return $this->redirectToRoute('task_details', [
+			'task_id' => $task_id,
+		]);
+	}
+
+	/**
+	 * @Route("tache/{task_id}/devalider", name="task_unvalidation")
+	 */
+	public function unvalidateTask(int $task_id)
+	{
+		$user_id = $this->getUser()->getId();
+
+		$entityManager = $this->getDoctrine()->getManager();
+		$task = $entityManager->getRepository(Task::class)->findWithUserVerification($task_id, $user_id);
+
+		if (count($task) > 0)
+		{
+			$task[0]->unvalidate();
+			$entityManager->flush();
+		}
+
+		return $this->redirectToRoute('task_details', [
+			'task_id' => $task_id,
+		]);
+	}
 }

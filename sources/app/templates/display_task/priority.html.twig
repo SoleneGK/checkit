@@ -40,9 +40,22 @@
 
 {% macro display_task_list(task_list, priority_tag) %}
 	{% for task in task_list %}
-	<div class="task {{ priority_tag }} d-flex flex-row">
+	<div class="task {{ priority_tag }} d-flex flex-row align-items-center">
 		<div class="flex-grow-1">{{ task.title }}</div>
-		<button type="button" class="btn-action"><a href="{{ path('task_details', {task_id: task.id}) }}"><span class="fas fa-ellipsis-v"></span></a></button>
+		
+		<label class="toggle_switch">
+			{% if task.active %}
+				<a href="{{ path('task_validation', {task_id: task.id}) }}">
+				<input type="checkbox">
+			{% else %}
+				<a href="{{ path('task_unvalidation', {task_id: task.id}) }}">
+				<input type="checkbox" checked>
+			{% endif %}
+			
+			<span class="toggle_slider"></span></a>
+		</label>
+
+		<button type="button" class="btn-action ml-3 mr-2"><a href="{{ path('task_details', {task_id: task.id}) }}"><span class="fas fa-ellipsis-v"></span></a></button>
 	</div>
 	{% endfor %}
 {% endmacro %}

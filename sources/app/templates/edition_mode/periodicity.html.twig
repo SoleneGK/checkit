@@ -43,6 +43,17 @@
 
 			<div class="task_edition_title">{{ task.title }}</div>
 			<div class="task_edition_buttons">
+				<label class="toggle_switch">
+					{% if task.active %}
+						<a href="{{ path('task_validation', {task_id: task.id}) }}">
+						<input type="checkbox">
+					{% else %}
+						<a href="{{ path('task_unvalidation', {task_id: task.id}) }}">
+						<input type="checkbox" checked>
+					{% endif %}
+					
+					<span class="toggle_slider"></span></a>
+				</label>
 				<button type="button" class="btn-action"><a href="{{ path('task_details', {task_id: task.id}) }}"><span class="fas fa-ellipsis-v"></span></a></button>
 				<button type="button" class="btn-action"><a href="{{ path('task_modification', {task_id: task.id}) }}"><span class="fas fa-edit yellow_icon"></span></a></button>
 				<button type="button" class="btn-action" id="delete_task"><a href="{{ path('task_deletion', {task_id: task.id}) }}"><span class="fas fa-trash-alt red_icon"></span></a></button>

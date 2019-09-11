@@ -337,6 +337,14 @@ class Task
 		$this->setLastExecutionDate(new \DateTime());
 	}
 
+	/**
+	 * Unvalidate the task by setting the last execution date 2 months ago
+	 */
+	public function unvalidate()
+	{
+		$this->setLastExecutionDate(null);
+	}
+
 	public function getLastExecutionDate(): ?\DateTimeInterface
 	{
 		return $this->last_execution_date;
