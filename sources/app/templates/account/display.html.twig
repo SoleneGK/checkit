@@ -1,0 +1,31 @@
+{% extends "app/index.html.twig" %}
+
+{% block content %}
+	{{ form_start(form, { 'attr': { 'class': 'form-when-no-user-logged text-center mx-auto'} }) }}
+		<h2 class="mb-4">Mon compte</h2>
+
+		<div class="text-left">
+			Mon identifiant : {{ app.user.username}}
+		</div>
+		<div class="text-left">
+			Mon e-mail : {{ app.user.email }}
+		</div>
+
+		<hr class="mb-5 mt-3">
+
+		<h2 class="mb-4">Modifier mon mot de passe</h2>
+		{{ form_errors(form) }}
+		{{ success_message }}
+
+		{{ form_label(form.oldPassword) }}
+		{{ form_widget(form.oldPassword, { 'attr': {'class': 'form-control mb-3'}})}}
+
+		{{ form_label(form.password.first) }}
+		{{ form_widget(form.password.first, { 'attr': {'class': 'form-control mb-3'}}) }}
+
+		{{ form_label(form.password.second) }}
+		{{ form_widget(form.password.second, { 'attr': {'class': 'form-control mb-3'}}) }}	
+
+		<button class="btn btn-blue">Modifier</button>
+	{{ form_end(form) }}
+{% endblock %}

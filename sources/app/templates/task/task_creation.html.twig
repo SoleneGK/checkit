@@ -1,16 +1,40 @@
 {% extends "app/index.html.twig" %}
 
 {% block content %}
-	<h1>Ajouter une tâche</h1>
+	<div class="content_window m-2 p-2">
+		{{ form_start(taskForm, { 'attr': { 'class': 'form-when-no-user-logged text-center mx-auto'} }) }}
+			<h2 class="mb-3">Ajouter une tâche</h2>
 
-	{{ form_start(taskForm) }}
-		{{ form_row(taskForm.title) }}
-		{{ form_row(taskForm.description) }}
-		{{ form_row(taskForm.start_date) }}
-		{{ form_row(taskForm.end_date) }}
-		{{ form_row(taskForm.priority) }}
-		{{ form_row(taskForm.periodicity) }}
+			{{ form_label(taskForm.title) }}
+			{{ form_widget(taskForm.title, { 'attr': {'class': 'form-control mb-3'}})}}
+			{{ form_errors(taskForm.title) }}
 
-		<button class="btn">Créer la tâche</button>
-	{{ form_end(taskForm) }}
+			{{ form_label(taskForm.description) }}
+			{{ form_widget(taskForm.description, { 'attr': {'class': 'form-control mb-3'}})}}
+			{{ form_errors(taskForm.description) }}
+
+			{{ form_label(taskForm.start_date) }}
+			{{ form_widget(taskForm.start_date, { 'attr': {'class': 'form-control mb-3'}})}}
+			{{ form_errors(taskForm.start_date) }}
+
+			{{ form_label(taskForm.end_date) }}
+			{{ form_widget(taskForm.end_date, { 'attr': {'class': 'form-control mb-3'}})}}
+			{{ form_errors(taskForm.end_date) }}
+
+			{{ form_label(taskForm.priority) }}
+			{{ form_widget(taskForm.priority, { 'attr': {'class': 'form-control mb-3'}})}}
+			{{ form_errors(taskForm.priority) }}
+
+			{{ form_label(taskForm.periodicity) }}
+			{{ form_widget(taskForm.periodicity, { 'attr': {'class': 'form-control mb-3'}})}}
+			{{ form_errors(taskForm.periodicity) }}
+
+			<div class="action_bar">
+				<button type="submit" class="btn-action"><span class="fas fa-plus green_icon"></span></button>
+				<button type="button" class="btn-action"><a href="{{ path('index') }}"><span class="fas fa-times red_icon"></span></a></button>
+			</div>
+			
+		{{ form_end(taskForm) }}
+
+	</div>	
 {% endblock %}

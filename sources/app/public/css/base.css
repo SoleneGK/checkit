@@ -9,9 +9,12 @@ body {
     max-width: 100%;
 }
 
-.menu {
-    background-color: #313c48;
-    height: 100vh;
+.content {
+    flex-direction: column;
+}
+
+.menu_text_block {
+    display: none;
 }
 
 h1 {
@@ -23,7 +26,6 @@ h1 a:hover {
     text-decoration: none;
 }
 
-
 h2 {
     font-family: Oswald, sans-serif;
 }
@@ -32,14 +34,15 @@ a, a:hover {
     color: #3bc1ff;
 }
 
-.w-limited {
-    max-width: 200px;
+hr {
+    border-color: #3bc1ff;
 }
 
 input[type=text], input[type=password], input[type=text]:focus, input[type=password]:focus, input[type=date], input[type=date]:focus, textarea, select {
     background-color: #313c48!important;
     color:#3bc1ff!important;
     border-color:#3bc1ff!important;
+    box-shadow: none!important;
 }
 
 input[type=submit], .btn-blue, option {
@@ -60,10 +63,140 @@ button a:hover {
     color: #c93629;
 }
 
-.cgu {
-    max-width: 250px;
-}
-
 .secondary-background {
     background-color: #313c48;
+}
+
+.form-when-no-user-logged {
+    max-width: 350px;
+}
+
+.menu_icons_block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left:10px;
+    margin-right:10px;
+    margin-bottom: 10px;
+}
+
+.yellow_icon {
+    color: #faca30;
+}
+
+.green_icon {
+    color: #92d050;
+}
+
+.red_icon {
+    color: #c93629;
+}
+
+.menu_icon {
+    font-size:50px;
+    background-color: #313c48;
+    border: transparent 1px black;
+    border-radius: .25em;
+    width: 65px;
+    text-align: center;
+}
+
+.icon_add {
+    order: 3;
+}
+
+.icon_display {
+    order: 0;
+}
+
+.icon_sort {
+    order: 2;
+}
+
+.icon_account {
+    order: 4;
+}
+
+.icon_logout {
+    order: 5;
+}
+
+.content_window {
+    background-color: #313c48;
+    border: transparent 1px black;
+    border-radius: .5em;
+}
+
+.action_bar {
+    display: flex;
+    justify-content: space-around;
+    font-size: 40px;
+}
+
+.btn-action {
+    background: none;
+    border:none;
+}
+
+@media all and (min-width: 768px) {
+    .content {
+        flex-direction: row;
+    }
+
+    .menu {
+        background-color: #313c48;
+        height: 100vh;
+        width: 250px;
+    }
+
+    nav {
+        display: flex;
+    }
+
+    .menu_icons_block {
+        flex-direction: column;
+    }
+
+    .menu_icon {
+        height: 75px;
+    }
+
+    .menu_text_block {
+        display: block;
+    }
+
+    .menu_text {
+        height: 75px;
+        font-size:20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .content_window {
+        width: 350px;
+        margin: auto!important;
+        margin-top: .5rem!important;
+        margin-bottom: .5rem!important;
+    }
+
+    .icon_add {
+        order: 0;
+    }
+    
+    .icon_display {
+        order: 2;
+    }
+    
+    .icon_sort {
+        order: 3;
+    }
+    
+    .icon_account {
+        order: 4;
+    }
+    
+    .icon_logout {
+        order: 5;
+    }
 }

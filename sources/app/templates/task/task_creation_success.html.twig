@@ -1,7 +1,27 @@
 {% extends "app/index.html.twig" %}
 
 {% block content %}
-    <p>La tâche a bien été créée avec les informations suivantes :</p>
-    <button><a href="{{ path('index') }}">Retourner à l'accueil</a></button>
-    <button><a href="{{ path('task_creation') }}">Créer une nouvelle tâche</a></button>
+<div class="content_window m-2 p-2">
+	<h2 class="mb-3 text-center">Ajouter une tâche</h2>
+
+	<p>La tâche a bien été créée avec les informations suivantes :
+		<ul>
+			<li>Titre : {{ task.title}}</li>
+			{% if task.description %}
+			<li>Description : {{ task.description }}</li>
+			{% endif %}
+			<li>Date de début : {{ task.startDate|date("d-m-Y") }}</li>
+			{% if task.endDate %}
+			<li>Date de fin : {{ task.endDate|date("d-m-Y") }}</li>
+			{% endif %}
+			<li>Priorité : {{ task.priority.name }}</li>
+			<li>Périodicité : {{ task.periodicity.name }}</li>
+		</ul>
+	</p>
+
+	<div class="action_bar">
+		<button type="button" class="btn-action"><a href="{{ path('task_creation') }}"><span class="fas fa-plus green_icon"></span></a></button>
+		<button type="button" class="btn-action"><a href="{{ path('index') }}"><span class="fas fa-calendar-alt"></span></a></button>
+	</div>
+</div>
 {% endblock %}
