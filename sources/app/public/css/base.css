@@ -40,6 +40,7 @@ input[type=text], input[type=password], input[type=text]:focus, input[type=passw
     background-color: #313c48!important;
     color:#3bc1ff!important;
     border-color:#3bc1ff!important;
+    box-shadow: none!important;
 }
 
 input[type=submit], .btn-blue, option {
@@ -60,10 +61,10 @@ button a:hover {
     color: #c93629;
 }
 
-.cgu {
-    max-width: 250px;
-}
-
 .secondary-background {
     background-color: #313c48;
+}
+
+.form-when-no-user-logged {
+    max-width: 350px;
 }

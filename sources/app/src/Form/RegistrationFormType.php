@@ -12,15 +12,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegistrationFormType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('username')
-			->add('email')
-			->add('plainPassword', RepeatedType::class, [
+			->add('username', TextType::class, [
+				'label' => 'Identifiant',
+				'attr' => [
+					'placeholder' => 'identifiant',
+				]
+			])
+			->add('email', TextType::class, [
+				'label' => 'E-mail',
+				'attr' => [
+					'placeholder' => 'e-mail',
+				]
+			])
+			->add('password', RepeatedType::class, [
 				// instead of being set onto the object directly,
 				// this is read and encoded in the controller
 				'type' => PasswordType::class,
@@ -49,6 +60,7 @@ class RegistrationFormType extends AbstractType
 						'message' => 'Vous devez accepter les conditions d\'utilisation.',
 					]),
 				],
+				'label' => 'Accepter les conditions d\'utilisation',
 			])
 		;
 	}
